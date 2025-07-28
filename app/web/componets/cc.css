@@ -1,0 +1,17 @@
+/* custom-swiper.css */
+.swiper-slide {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: #f3f4f6;
+  padding: 2rem;
+  text-align: center;
+  border-radius: 1rem;
+  opacity: 0.6;
+  transform: scale(0.9);
+}
+
+.swiper-slide-active {
+  opacity: 1;
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+  background-color: #ffffff;
+}

@@ -25,6 +25,10 @@ h1, h2, h3, h4 {
 .swiper-button-prev::after {
   font-size: 30px; /* Optional: make arrows bigger */
 }
+/* highlight active slide using Tailwind classes */
+.swiper-slide-active .slide-card {
+  @apply opacity-100 scale-105 bg-white shadow-xl;
+}
 
 
 @theme inline {
