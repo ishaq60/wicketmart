@@ -27,11 +27,11 @@ const FeaturedProducts = () => {
         className="mt-4 sm:mt-6 md:mt-8" 
         breakpoints={{ 
           640: { 
-            slidesPerView: 2, 
+            slidesPerView: 1, 
             spaceBetween: 20, 
           }, 
           1024: { 
-            slidesPerView: 4, 
+            slidesPerView: 3, 
             spaceBetween: 30, 
           }, 
         }} 
@@ -39,19 +39,19 @@ const FeaturedProducts = () => {
         {/* SwiperSlide content */}
         {products.map((product, index) => ( 
           <SwiperSlide key={index}> 
-            <div className="slide-card group w-full max-w-[500px] sm:max-w-[350px] md:max-w-[500px] h-auto sm:h-[350px] md:h-[450px] mb-8 sm:mb-10 md:mb-12 mx-auto transition-all duration-300 ease-in-out bg-gray-200 p-4 sm:p-6 md:p-8 rounded-xl text-center opacity-60 scale-90"> 
-              <div className="card bg-base-100 mb-2 sm:mb-3 md:mb-4"> 
+            <div className="slide-card group w-full max-w-[500px] sm:max-w-[350px] md:max-w-[600px] h-auto sm:h-[350px] md:h-[500px] mb-8 sm:mb-10 md:mb-12 mx-auto transition-all duration-300 ease-in-out bg-gray-200 p-4 sm:p-6 md:p-8 rounded-xl text-center opacity-60 "> 
+              <div className="card "> 
                 <div className="card-body items-center text-center p-3 sm:p-4 md:p-6"> 
                   <h2 className="card-title text-xl font-semibold sm:text-lg md:text-xl group-hover:text-red-500"> 
                     SG klr Xtreme English Willow Short Handle Cricket bat 
                   </h2>
                   <Image src={oneimage} alt="oneimage" />
-                  <div className="flex items-baseline space-x-2 mt-2"> 
+                  <div className="flex items-baseline space-x-2 "> 
                     <span className="text-3xl font-bold text-black group-hover:text-red-500"> 
-                      ₹14,950 
+                      ৳14,950 
                     </span> 
                     <span className="text-2xl line-through text-black group-hover:text-red-500"> 
-                      ₹23,000 
+                      ৳23,000 
                     </span> 
                   </div> 
                 </div> 

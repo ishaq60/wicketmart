@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import Hero from "./web/componets/Hero";
 import Productpage from "./products/page";
+import TrendingProduct from "./web/componets/TrendingProduct";
 
 
 
@@ -11,6 +12,8 @@ export default function Home() {
 <div className="mb-100">
 
 <Productpage></Productpage>
+
+<TrendingProduct></TrendingProduct>
 
 
 
