@@ -14,6 +14,19 @@ h1, h2, h3, h4 {
   font-family: var(--font-geist-sans);
 }
 
+/* === Swiper Navigation Arrows === */
+
+.swiper-button-next,
+.swiper-button-prev {
+  color: #ffffff; /* Make the arrows white */
+}
+
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 30px; /* Optional: make arrows bigger */
+}
+
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
