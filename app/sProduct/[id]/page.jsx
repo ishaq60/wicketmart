@@ -1,10 +1,11 @@
-import ProductDetails from '@/app/web/componets/productDetails/ProductDetailsPage';
+
+import ProductHome from '@/app/web/componets/productDetails/ProductHome';
 import React from 'react';
 
 const page = () => {
     return (
         <div className='min-h-screen'>
-           <ProductDetails></ProductDetails>
+         <ProductHome></ProductHome>
         </div>
     );
 };

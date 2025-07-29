@@ -3,7 +3,7 @@ import ProductDetails from './productDetails';
 import UsersRating from './Usersrating';
 
 
-const ProductDeatailsPage = () => {
+const ProductHome = () => {
   return (
     <div className=' mb-50'>
       <ProductDetails></ProductDetails>
@@ -12,4 +12,4 @@ const ProductDeatailsPage = () => {
   );
 };
 
-export default ProductDeatailsPage;
+export default ProductHome;
