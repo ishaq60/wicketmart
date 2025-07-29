@@ -2,7 +2,7 @@ import React from 'react';
 import FeaturedProducts from '../web/componets/FeaturedProducts';
 
 
-const Productpage = () => {
+const Productpages = () => {
     return (
         <div>
           <FeaturedProducts></FeaturedProducts>
@@ -10,4 +10,4 @@ const Productpage = () => {
     );
 };
 
-export default Productpage;
+export default Productpages;

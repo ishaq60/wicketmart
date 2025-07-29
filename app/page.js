@@ -1,9 +1,12 @@
 
+
+
+
+
+import Productpages from "./FeaturedProduct/page";
 import Hero from "./web/componets/Hero";
-
-
-import Productpage from "./FeaturedProduct/page";
 import TrendingProduct from "./web/componets/TrendingProduct";
+
 
 export default function Home() {
   return (
@@ -12,7 +15,7 @@ export default function Home() {
         <Hero></Hero>
       </div>
       <div className="mb-100">
-       <Productpage></Productpage>
+       <Productpages></Productpages>
 
        <TrendingProduct></TrendingProduct>
       </div>
