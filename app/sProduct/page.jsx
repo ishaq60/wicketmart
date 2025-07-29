@@ -4,7 +4,7 @@ import { Star } from 'lucide-react';
 import Link from 'next/link';
 
 export default function() {
-    const product=[1,2,3,4,5,6,7,8]
+    const product=[1,2,3,4]
   return (
   <div className='container mx-auto'>
     <h1 className='text-4xl mt-20 font-bold text-center'>Trending Products</h1>
@@ -12,7 +12,7 @@ export default function() {
       {
         product.map(product=>(
   <Link href={`/product/:id`}>
-              <div key={product.id} className="w-[350px] bg-white border border-gray-200 rounded-lg h-[470px] shadow-sm ">
+              <div key={product.id} className="w-[350px] bg-white border border-gray-200 rounded-lg h-[600px] shadow-sm ">
       {/* Product Images */}
       <div className="relative bg-gray-50 p-16">
         <div className="flex justify-center items-center space-x-2">

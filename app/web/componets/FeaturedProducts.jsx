@@ -7,6 +7,7 @@ import "swiper/css";
 import "swiper/css/autoplay"; 
 import Image from "next/image"; 
 import oneimage from "../../../public/Image/Cricket-wepon/03.jpg"; 
+import Link from "next/link";
 
 const FeaturedProducts = () => { 
   const products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -39,6 +40,7 @@ const FeaturedProducts = () => {
         {/* SwiperSlide content */}
         {products.map((product, index) => ( 
           <SwiperSlide key={index}> 
+           <Link href={`/sProduct/:id`}>
             <div className="slide-card group w-full max-w-[500px] sm:max-w-[350px] md:max-w-[600px] h-auto sm:h-[350px] md:h-[500px] mb-8 sm:mb-10 md:mb-12 mx-auto transition-all duration-300 ease-in-out bg-gray-200 p-4 sm:p-6 md:p-8 rounded-xl text-center opacity-60 "> 
               <div className="card "> 
                 <div className="card-body items-center text-center p-3 sm:p-4 md:p-6"> 
@@ -57,6 +59,8 @@ const FeaturedProducts = () => {
                 </div> 
               </div> 
             </div>
+           
+           </Link>
           </SwiperSlide> 
         ))} 
       </Swiper> 
