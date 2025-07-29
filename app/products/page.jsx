@@ -1,6 +1,7 @@
 import React from "react";
-import ProductSlice from "../web/componets/ProductComponents/ProductSlice";
-import ProductCard from "../web/componets/ProductComponents/productCard";
+import ProductSlice from "../web/components/ProductComponents/ProductSlice";
+import ProductCard from "../web/components/ProductComponents/ProductCard";
+
 
 
 const Productpage = () => {

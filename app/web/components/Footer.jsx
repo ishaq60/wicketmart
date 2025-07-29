@@ -11,7 +11,7 @@ import {
   Linkedin,
 } from "lucide-react";
 
-export default function CricketWeaponFooter() {
+export default function Footer() {
   return (
     <div className="bg-black text-white">
       {/* Top Features Section */}

@@ -5,7 +5,7 @@ import { IoMdArrowDropdown  } from "react-icons/io";
 import { FaUserAlt } from "react-icons/fa";
 import { IoCart } from "react-icons/io5";
 import { ImSearch } from "react-icons/im";
-const Header = () => {
+const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
@@ -19,7 +19,7 @@ const Header = () => {
 
   return (
     <div className="w-full">
-      {/* Main Header */}
+      {/* Main Navbar */}
       <div className="w-full h-[120px] bg-white shadow-md relative z-50">
         <div className="container mx-auto px-4 h-full">
           <div className="flex items-center justify-between h-full">
@@ -218,4 +218,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export default Navbar;

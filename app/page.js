@@ -4,8 +4,10 @@
 
 
 import Productpages from "./FeaturedProduct/page";
-import Hero from "./web/componets/Hero";
-import TrendingProduct from "./web/componets/TrendingProduct";
+import Hero from "./web/components/Hero";
+import TrendingProduct from "./web/components/TrendingProduct";
+
+
 
 
 export default function Home() {

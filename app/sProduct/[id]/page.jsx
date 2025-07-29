@@ -1,5 +1,6 @@
 
-import ProductHome from '@/app/web/componets/productDetails/ProductHome';
+
+import ProductHome from '@/app/web/components/productDetails/ProductHome';
 import React from 'react';
 
 const page = () => {

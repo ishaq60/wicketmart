@@ -1,5 +1,6 @@
 import React from 'react';
-import FeaturedProducts from '../web/componets/FeaturedProducts';
+import FeaturedProducts from '../web/components/FeaturedProducts';
+
 
 
 const Productpages = () => {
