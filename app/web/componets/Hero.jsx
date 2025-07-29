@@ -1,4 +1,4 @@
-import HeroSlider from '@/app/componet/HeroCompont';
+import HeroSlider from '@/app/components/HeroCompont';
 import React from 'react';
 
 const Hero = () => {

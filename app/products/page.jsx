@@ -2,6 +2,7 @@ import React from "react";
 import ProductSlice from "../web/componets/ProductComponents/ProductSlice";
 import ProductCard from "../web/componets/ProductComponents/productCard";
 
+
 const Productpage = () => {
   return (
     <div className="min-h-screen">
@@ -15,7 +16,7 @@ const Productpage = () => {
 
         {/* Main Product Area (75% width on large screens) */}
         <div className="w-full min-h-screen   mx-0  lg:w-3/4 border shadow-xl rounded-md p-4">
-          <ProductCard />
+          <ProductCard></ProductCard>
         </div>
       </div>
     </div>

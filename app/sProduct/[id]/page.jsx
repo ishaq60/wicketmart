@@ -1,4 +1,4 @@
-import ProductDetails from '@/app/web/componets/productDetails/ProductDeatailsPage';
+import ProductDetails from '@/app/web/componets/productDetails/ProductDetailsPage';
 import React from 'react';
 
 const page = () => {
