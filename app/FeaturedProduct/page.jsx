@@ -1,10 +1,11 @@
 import React from 'react';
 import FeaturedProducts from '../web/componets/FeaturedProducts';
 
+
 const Productpage = () => {
     return (
-        <div className='min-h-screen'>
-      this is product page
+        <div>
+          <FeaturedProducts></FeaturedProducts>
         </div>
     );
 };

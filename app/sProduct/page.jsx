@@ -11,8 +11,8 @@ export default function() {
   <div className='grid sm:grid-cols-2 gap-y-4 md:grid-cols-4 lg:grid-cols-4 justify-center items-center mt-20'>
       {
         product.map(product=>(
-  <Link href={`/sProduct/:id`}>
-              <div key={product} className="w-[350px] bg-white border border-gray-200 rounded-lg h-[470px] shadow-sm ">
+  <Link href={`/product/:id`}>
+              <div key={product.id} className="w-[350px] bg-white border border-gray-200 rounded-lg h-[470px] shadow-sm ">
       {/* Product Images */}
       <div className="relative bg-gray-50 p-16">
         <div className="flex justify-center items-center space-x-2">
