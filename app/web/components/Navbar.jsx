@@ -70,7 +70,7 @@ const Navbar = () => {
               <div className="relative flex items-center">
                 {isSearchOpen ? (
                   <div className="flex items-center bg-gray-100 rounded-full px-4 py-2 w-80">
-                    <Search size={35} className="text-black mr-3" />
+                    <Search size={30} className="text-black mr-3" />
                     <input
                       type="text"
                       placeholder="Search........"
@@ -89,14 +89,14 @@ const Navbar = () => {
                     className="text-[#121212] hover:text-red-600 transition-colors duration-300 p-2 hover:bg-gray-100 rounded-full"
                     onClick={() => setIsSearchOpen(true)}
                   >
-                    <ImSearch size={35} />
+                    <ImSearch size={30} />
                   </button>
                 )}
               </div>
 
               <Link href="/cart">
                 <button className="relative text-[#121212] hover:text-red-600 transition-colors duration-300 p-2 hover:bg-gray-100 rounded-full">
-                  <IoCart size={35} />
+                  <IoCart size={30} />
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
                     1
                   </span>
@@ -108,7 +108,7 @@ const Navbar = () => {
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                 >
                   <div className="flex">
-                    <FaUserAlt size={35} />{" "}
+                    <FaUserAlt size={30} />{" "}
                     <IoMdArrowDropdown
                       size={25}
                       className="mt-2"
@@ -134,21 +134,21 @@ const Navbar = () => {
                         className="flex items-center text-md px-4 py-3 hover:bg-[#ed1c24] transition-colors"
                       >
                         <User size={35} className="mr-3" />
-                        Profile
+                        profile
                       </a>
                       <a
                         href="/orders"
                         className="flex items-center  text-xl px-4 py-3 hover:bg-[#ed1c24] transition-colors"
                       >
                         <div className="w-4 h-4 mr-3">📋</div>
-                        Orders
+                        orders
                       </a>
                       <a
                         href="/cart"
                         className="flex items-center px-4  text-xl py-3 hover:bg-[#ed1c24] transition-colors"
                       >
                         <ShoppingCart size={36} className="mr-3" />
-                        Cart
+                        cart
                       </a>
                       <a
                         href="/login"
