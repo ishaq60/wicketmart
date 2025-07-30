@@ -12,7 +12,7 @@ import TrendingProduct from "./web/components/TrendingProduct";
 
 export default function Home() {
   return (
-    <div className="mt-2 min-h-screen">
+    <div className="mt-2 ">
       <div className="w-full mb-10">
         <Hero></Hero>
       </div>

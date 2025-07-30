@@ -1,10 +1,11 @@
-"use client"
+"use client";
 import React, { useState } from "react";
-import { Search, ShoppingCart, User, Menu, X, Link } from "lucide-react";
-import { IoMdArrowDropdown  } from "react-icons/io";
+import { Search, ShoppingCart, User, Menu, X } from "lucide-react";
+import { IoMdArrowDropdown } from "react-icons/io";
 import { FaUserAlt } from "react-icons/fa";
 import { IoCart } from "react-icons/io5";
 import { ImSearch } from "react-icons/im";
+import Link from "next/link";
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -20,7 +21,7 @@ const Navbar = () => {
   return (
     <div className="w-full">
       {/* Main Navbar */}
-      <div className="w-full h-[120px] bg-white shadow-md relative z-50">
+      <div className="w-full h-[80px] bg-white shadow-md relative z-50">
         <div className="container mx-auto px-4 h-full">
           <div className="flex items-center justify-between h-full">
             {/* Left Side - Mobile Menu + Logo */}
@@ -31,12 +32,16 @@ const Navbar = () => {
                   className="text-[#121212] hover:text-red-600 transition-colors duration-300 p-2"
                   onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 >
-                  {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+                  {isMobileMenuOpen ? (
+                    <X className="h-6 w-6" />
+                  ) : (
+                    <Menu className="h-6 w-6" />
+                  )}
                 </button>
               </div>
 
               {/* Logo */}
-              <a   href="/" className="flex items-center">
+              <a href="/" className="flex items-center">
                 <div className="w-16 h-8 bg-black rounded flex items-center justify-center mr-2">
                   <span className="text-white font-bold text-2xl">W</span>
                 </div>
@@ -48,8 +53,8 @@ const Navbar = () => {
               <ul className="flex space-x-8">
                 {navLinks.map((link) => (
                   <li key={link.id}>
-                    <a 
-                      href={link.href} 
+                    <a
+                      href={link.href}
                       className="text-[#121212] font-semibold text-xl hover:text-red-600 px-8 py-2   transition-colors duration-300"
                     >
                       {link.name}
@@ -80,53 +85,75 @@ const Navbar = () => {
                     </button>
                   </div>
                 ) : (
-                  <button 
+                  <button
                     className="text-[#121212] hover:text-red-600 transition-colors duration-300 p-2 hover:bg-gray-100 rounded-full"
                     onClick={() => setIsSearchOpen(true)}
                   >
-                   <ImSearch size={35}/>
+                    <ImSearch size={35} />
                   </button>
                 )}
               </div>
-              
-              <button className="relative text-[#121212] hover:text-red-600 transition-colors duration-300 p-2 hover:bg-gray-100 rounded-full">
-          
-                <IoCart  size={35} />
-                <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
-                  1
-                </span>
-              </button>
+
+              <Link href="/cart">
+                <button className="relative text-[#121212] hover:text-red-600 transition-colors duration-300 p-2 hover:bg-gray-100 rounded-full">
+                  <IoCart size={35} />
+                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
+                    1
+                  </span>
+                </button>
+              </Link>
               <div className="relative">
-                <button 
+                <button
                   className="text-[#121212] hover:text-red-600 transition-colors duration-300 p-2 hover:bg-gray-100 rounded-full"
                   onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
                 >
                   <div className="flex">
-                  <FaUserAlt size={35} /> <IoMdArrowDropdown size={25} className="mt-2"></IoMdArrowDropdown>
+                    <FaUserAlt size={35} />{" "}
+                    <IoMdArrowDropdown
+                      size={25}
+                      className="mt-2"
+                    ></IoMdArrowDropdown>
                   </div>
                 </button>
-                
+
                 {/* User Dropdown Menu */}
                 {isUserMenuOpen && (
                   <div className="absolute right-0 top-full mt-2 w-[350px] h-[400px] p-4 bg-[#121212] text-white rounded-lg shadow-lg z-50">
                     <div className="p-4 border-b border-gray-700">
-                      <h3 className="font-semibold text-lg text-center">Welcome!</h3>
-                      <p className="text-md text-white  text-center">To access your account and <br /> manage orders, please log in.</p>
+                      <h3 className="font-semibold text-lg text-center">
+                        Welcome!
+                      </h3>
+                      <p className="text-md text-white  text-center">
+                        To access your account and <br /> manage orders, please
+                        log in.
+                      </p>
                     </div>
                     <div className="py-2">
-                      <a href="/profile" className="flex items-center text-xl px-4 py-3 hover:bg-[#ed1c24] transition-colors">
+                      <a
+                        href="/profile"
+                        className="flex items-center text-xl px-4 py-3 hover:bg-[#ed1c24] transition-colors"
+                      >
                         <User size={35} className="mr-3" />
                         Profile
                       </a>
-                      <a   href="/orders" className="flex items-center  text-xl px-4 py-3 hover:bg-[#ed1c24] transition-colors">
+                      <a
+                        href="/orders"
+                        className="flex items-center  text-xl px-4 py-3 hover:bg-[#ed1c24] transition-colors"
+                      >
                         <div className="w-4 h-4 mr-3">📋</div>
                         Orders
                       </a>
-                      <a   href="/cart" className="flex items-center px-4  text-xl py-3 hover:bg-[#ed1c24] transition-colors">
+                      <a
+                        href="/cart"
+                        className="flex items-center px-4  text-xl py-3 hover:bg-[#ed1c24] transition-colors"
+                      >
                         <ShoppingCart size={36} className="mr-3" />
                         Cart
                       </a>
-                      <a   href="/login" className="flex items-center px-4 py-3  text-xl hover:bg-[#ed1c24] transition-colors">
+                      <a
+                        href="/login"
+                        className="flex items-center px-4 py-3  text-xl hover:bg-[#ed1c24] transition-colors"
+                      >
                         <div className="w-4 h-4 mr-3">🔓</div>
                         Login
                       </a>
@@ -142,7 +169,7 @@ const Navbar = () => {
       {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <>
-          <div 
+          <div
             className="fixed inset-0  bg-opacity-50 z-40 lg:hidden"
             onClick={() => setIsMobileMenuOpen(false)}
           ></div>
@@ -160,7 +187,7 @@ const Navbar = () => {
                 <X size={24} />
               </button>
             </div>
-            
+
             {/* Country selector */}
             <div className="p-4 border-b border-gray-700">
               <div className="flex items-center text-sm">
@@ -170,27 +197,45 @@ const Navbar = () => {
             </div>
 
             <div className="py-4 text-xl">
-              <a   href="/" className="flex items-center px-6 py-4 hover:bg-[#ed1c24] transition-colors">
+              <a
+                href="/"
+                className="flex items-center px-6 py-4 hover:bg-[#ed1c24] transition-colors"
+              >
                 <div className="w-5 h-5 mr-4">🏠</div>
                 Home
               </a>
-              <a   href="/products" className="flex items-center px-6 py-4 bg-red-600 hover:bg-red-700 transition-colors">
+              <a
+                href="/products"
+                className="flex items-center px-6 py-4 bg-red-600 hover:bg-red-700 transition-colors"
+              >
                 <div className="w-5 h-5 mr-4">📦</div>
                 Products
               </a>
-              <a href="/contact" className="flex items-center px-6 py-4 hover:bg-[#ed1c24] transition-colors">
+              <a
+                href="/contact"
+                className="flex items-center px-6 py-4 hover:bg-[#ed1c24] transition-colors"
+              >
                 <div className="w-5 h-5 mr-4">📞</div>
                 Contact
               </a>
-              <a href="/about" className="flex items-center px-6 py-4 hover:bg-[#ed1c24] transition-colors">
+              <a
+                href="/about"
+                className="flex items-center px-6 py-4 hover:bg-[#ed1c24] transition-colors"
+              >
                 <div className="w-5 h-5 mr-4">ℹ️</div>
                 About Us
               </a>
-              <a   href="/account" className="flex items-center px-6 py-4 hover:bg-[#ed1c24] transition-colors">
+              <a
+                href="/account"
+                className="flex items-center px-6 py-4 hover:bg-[#ed1c24] transition-colors"
+              >
                 <User size={20} className="mr-4" />
                 Account
               </a>
-              <a   href="/login" className="flex items-center px-6 py-4 hover:bg-[#ed1c24] transition-colors">
+              <a
+                href="/login"
+                className="flex items-center px-6 py-4 hover:bg-[#ed1c24] transition-colors"
+              >
                 <div className="w-5 h-5 mr-4">🔐</div>
                 Login
               </a>
@@ -198,18 +243,18 @@ const Navbar = () => {
           </div>
         </>
       )}
-      
+
       {/* Close search when clicking outside */}
       {isSearchOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-50 w-full"
           onClick={() => setIsSearchOpen(false)}
         ></div>
       )}
-      
+
       {/* Close user menu when clicking outside */}
       {isUserMenuOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-30"
           onClick={() => setIsUserMenuOpen(false)}
         ></div>
