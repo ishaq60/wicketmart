@@ -6,7 +6,7 @@ import bat from "../../../public/Image/products/bats/zip/0002.jpg";
 import React, { useState } from "react";
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
-
+import cartiamge from "../../../public/Image/cart/cart_img.png"
 const Cartcomponent = () => {
   const [quantity, setQuantity] = useState(1);
   const [couponCode, setCouponCode] = useState("");
@@ -169,6 +169,16 @@ const Cartcomponent = () => {
           <button className="w-full mt-6 bg-black text-white py-4 px-4 text-md font-semibold hover:bg-red-600 transition-colors duration-200">
             Checkout
           </button>
+          <div className="mt-4 m-2">
+  <Image
+    src={cartiamge}
+    alt="cart image"
+    className="w-full mt-2 p-2 h-20 object-cover rounded-lg shadow-md"
+    width={300}
+    height={256}
+  />
+</div>
+
         </div>
       </div>
     </div>
