@@ -42,7 +42,7 @@ const Navbar = () => {
 
               {/* Logo */}
               <a href="/" className="flex items-center">
-                <div className="w-16 h-8 bg-black rounded flex items-center justify-center mr-2">
+                <div className="w-16 h-6 bg-black rounded flex items-center justify-center mr-2">
                   <span className="text-white font-bold text-2xl">W</span>
                 </div>
               </a>
@@ -55,7 +55,7 @@ const Navbar = () => {
                   <li key={link.id}>
                     <a
                       href={link.href}
-                      className="text-[#121212] font-semibold text-xl hover:text-red-600 px-8 py-2   transition-colors duration-300"
+                      className="text-[#121212] font-semibold text-md hover:text-red-600 px-8 py-2   transition-colors duration-300"
                     >
                       {link.name}
                     </a>
@@ -118,7 +118,7 @@ const Navbar = () => {
 
                 {/* User Dropdown Menu */}
                 {isUserMenuOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-[350px] h-[400px] p-4 bg-[#121212] text-white rounded-lg shadow-lg z-50">
+                  <div className="absolute right-0 top-full mt-2 w-[300px] h-[350px] p-4 bg-[#121212] text-white rounded-lg shadow-lg z-50">
                     <div className="p-4 border-b border-gray-700">
                       <h3 className="font-semibold text-lg text-center">
                         Welcome!
@@ -131,7 +131,7 @@ const Navbar = () => {
                     <div className="py-2">
                       <a
                         href="/profile"
-                        className="flex items-center text-xl px-4 py-3 hover:bg-[#ed1c24] transition-colors"
+                        className="flex items-center text-md px-4 py-3 hover:bg-[#ed1c24] transition-colors"
                       >
                         <User size={35} className="mr-3" />
                         Profile
