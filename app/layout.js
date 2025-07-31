@@ -1,8 +1,7 @@
 import { Geist, Geist_Mono, Roboto } from "next/font/google";
 import "./globals.css";
 import Topheader from "./web/components/Topheader";
-import Navbar from "./web/components/Navbar";
-import Footer from "./web/components/Footer";
+
 import Provider from "./Provider";
 
 
@@ -32,11 +31,11 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} ${roboto.variable} antialiased`}
       >
         <Topheader />
-        <Navbar  />
+       
         <Provider>
         {children}
         </Provider>
-        <Footer />
+
       </body>
     </html>
   );

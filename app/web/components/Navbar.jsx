@@ -6,6 +6,7 @@ import { FaUserAlt } from "react-icons/fa";
 import { IoCart } from "react-icons/io5";
 import { ImSearch } from "react-icons/im";
 import Link from "next/link";
+import { useDispatch, useSelector } from "react-redux";
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
@@ -17,7 +18,8 @@ const Navbar = () => {
     { id: "contact", name: "Contact", href: "/contact" },
     { id: "about", name: "About", href: "/about" },
   ];
-
+const cartItems = useSelector((state) => state.cart.cartItems);
+  const dispatch = useDispatch();
   return (
     <div className="w-full">
       {/* Main Navbar */}
@@ -98,7 +100,7 @@ const Navbar = () => {
                 <button className="relative text-[#121212] hover:text-red-600 transition-colors duration-300 p-2 hover:bg-gray-100 rounded-full">
                   <IoCart size={30} />
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
-                    1
+                   {cartItems.length}
                   </span>
                 </button>
               </Link>
