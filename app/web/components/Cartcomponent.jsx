@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import cartiamge from "../../../public/Image/cart/cart_img.png";
 
 import bat from "../../../public/Image/products/bats/zip/0002.jpg"; // fallback image
+import { removeFromCart } from "./store/cartSlice";
 
 const Cartcomponent = () => {
   const cartItems = useSelector((state) => state.cart.cartItems);
@@ -35,17 +36,23 @@ const Cartcomponent = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:space-x-12 space-y-4 sm:space-y-0 mt-8">
         <h1 className="text-3xl font-bold">Shopping Cart</h1>
-        <Link href={"/products"} className="underline hover:text-red-500 text-xl">
+        <Link href={"/products"} className="underline  mt-1 hover:text-red-500 text-xl">
           Continue Shopping
         </Link>
       </div>
 
       {/* Cart and Summary */}
       <div className="flex flex-col lg:flex-row justify-between gap-8">
+    {
+  cartItems.length === 0 && (
+    <h1 className="text-red-500 text-center text-2xl m-15">No Item Found in Cart</h1>
+  )
+}
+
         {/* Cart Item */}
-        <div className="max-w-[750px] max-h-[350px] h-auto mt-12 bg-white border border-gray-200 rounded-lg shadow-sm flex flex-col md:flex-row">
+        <div className="max-w-[750px] gap-y-5  h-auto mt-12 bg-white border border-gray-200 rounded-lg shadow-sm">
           {cartItems.map((cart) => (
-            <div key={cart.id} className="flex w-full">
+            <div key={cart.id} className="flex gap-5 w-full">
               {/* Image Section */}
               <div className="w-full md:w-2/6 h-full p-4 flex items-center justify-center bg-gray-50">
                 <Image
@@ -64,7 +71,7 @@ const Cartcomponent = () => {
                   <h2 className="text-lg font-medium text-gray-900 leading-tight">
                     {cart.name}
                   </h2>
-                  <button className="text-red-500 hover:text-black ml-4">
+                  <button onClick={() => dispatch(removeFromCart(cart?.id))} className="text-red-500 hover:text-black ml-4">
                     <Trash2 size={20} />
                   </button>
                 </div>
