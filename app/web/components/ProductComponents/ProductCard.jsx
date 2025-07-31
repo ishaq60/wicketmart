@@ -1,81 +1,134 @@
-"use client";
+'use client';
+
 import React from "react";
-import Link from "next/link";
 import { Star } from "lucide-react";
+import Link from "next/link";
+
+import { toast } from "react-toastify";
+import useAllProducts from "@/app/Hooks/useAllProducts";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../store/cartSlice";
+import Image from "next/image";
+import Loadingred from "../loadingred";
 import Pagination from "./Pagination";
 
-const ProductCard = () => {
-  const products = [1, 2, 3, 4,5,6,7,8];
+
+// ⭐ Star Rating Component
+const StarRating = ({ rating = 0 }) => {
+  const filledStars = Math.floor(rating);
+  const halfStar = rating % 1 >= 0.5;
 
   return (
-    <div>
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 p-4">
-      {products.map((product) => (
-        <Link
-          key={product}
-          href={`/sProduct/${product}`}
-          className="w-[350px] bg-white border border-gray-200 space-y-6 rounded-lg h-[550px] shadow-sm block"
-        >
-          {/* Product Images */}
-          <div className="relative bg-gray-50 p-16">
-            <div className="flex justify-center items-center space-x-2">
-              {/* Three bats */}
-              {Array.from({ length: 3 }).map((_, i) => (
-                <div
-                  key={i}
-                  className="w-16 h-32 bg-gradient-to-b from-yellow-100 to-yellow-200 rounded-sm relative"
-                >
-                  <div className="absolute inset-2 bg-gradient-to-b from-amber-50 to-amber-100 rounded-sm">
-                    <div className="w-full h-8 bg-black rounded-sm mb-2 flex items-center justify-center">
-                      <span className="text-white text-xs font-bold">SG</span>
-                    </div>
-                    <div className="w-full flex-1 bg-gradient-to-b from-amber-100 to-yellow-200"></div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+    <div className="flex items-center gap-0.5">
+      {[...Array(5)].map((_, i) => {
+        const isFilled = i < filledStars;
+        const isHalf = i === filledStars && halfStar;
 
-          {/* Product Details */}
-          <div className="p-4">
-            <h3 className="text-sm font-medium text-gray-900 mb-2">
-              GM Chrome 707...
-            </h3>
-
-            <div className="flex items-center mb-2">
-              <div className="flex space-x-0.5">
-                <Star className="w-5 h-4 fill-red-500 text-red-500" />
-                <Star className="w-5 h-4 fill-red-500 text-red-500" />
-                <Star className="w-5 h-3 fill-gray-300 text-gray-300" />
-                <Star className="w-5 h-3 fill-gray-300 text-gray-300" />
-                <Star className="w-5 h-3 fill-gray-300 text-gray-300" />
-              </div>
-              <span className="text-xs text-gray-500 ml-1">(1)</span>
-            </div>
-
-            <p className="text-xs text-gray-600 mb-3">
-              Handle: short handle Weight 1170-1230 Bat...
-            </p>
-
-            <div className="flex items-center space-x-2 mb-4">
-              <span className="text-sm text-gray-500 line-through">₹18,000</span>
-              <span className="text-lg font-bold text-gray-900">₹11,700</span>
-            </div>
-
-            <button className="w-full mt-6 bg-black text-white py-6 px-4 text-md font-semibold hover:bg-red-600 transition-colors duration-200">
-              ADD TO CART
-            </button>
-          </div>
-        </Link>
-      ))}
-    
-  
-    </div>
-       <div>
-         <Pagination></Pagination>
-       </div>
+        return (
+          <Star
+            key={i}
+            className={`w-4 h-4 ${
+              isFilled || isHalf
+                ? "fill-yellow-500 text-yellow-500"
+                : "text-gray-300"
+            }`}
+          />
+        );
+      })}
     </div>
   );
 };
 
-export default ProductCard;
+export default function ProductCard() {
+  const dispatch = useDispatch();
+  const { products } = useAllProducts();
+
+  if (!products || products.length === 0) {
+    return (
+      <div className="w-full py-16 flex justify-center items-center">
+        <Loadingred></Loadingred>
+        <p className="text-gray-500">No trending products available.</p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="container mx-auto px-4">
+      <h1 className="text-4xl mt-5 font-bold text-center">Products</h1>
+
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 mt-20 justify-center items-stretch">
+        {products?.map((product) => {
+          const handleAdd = () => {
+            dispatch(addToCart({
+              id: product._id,
+              name: product.name,
+              price: product.price,
+              image: product.images?.[0],
+              quantity: 1, // ✅ always provide quantity
+            }));
+              toast.success(`${product.name} added to cart!`);
+          };
+
+          return (
+            <div
+              key={product._id}
+              className="w-full max-w-[300px] h-[520px] bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col justify-between"
+            >
+              <Link
+                href={`/sProduct/${product._id}`}
+                className="flex-grow flex flex-col justify-between"
+              >
+                {/* Image */}
+                <div className="bg-gray-50 flex justify-center items-center py-6">
+                  <Image
+                    src={product?.images?.[0] || "/placeholder.jpg"}
+                    width={150}
+                    height={170}
+                    alt="product image"
+                    className="object-contain h-[170px] w-auto"
+                  />
+                </div>
+
+                {/* Details */}
+                <div className="p-4 flex flex-col mt-2 justify-between flex-grow">
+                  <h3 className="text-sm font-medium text-gray-900 mb-1 truncate">
+                    {product?.name}
+                  </h3>
+
+                  <div className="flex items-center mb-2">
+                    <StarRating rating={product?.averageRating || 0} />
+                    <span className="text-sm text-gray-500 ml-1">
+                      ({product?.totalReviews || 0})
+                    </span>
+                  </div>
+
+                  <p className="text-sm mt-2 text-gray-600 line-clamp-2">
+                    {product?.description}
+                  </p>
+
+                  <div className="flex items-center mt-4 space-x-2">
+                    <span className="text-lg font-bold text-gray-900">
+                      ৳{product?.price || "11700"}
+                    </span>
+                    <span className="text-sm text-gray-500 line-through decoration-red-500">
+                      ৳{product?.originalPrice || "18000"}
+                    </span>
+                  </div>
+                </div>
+              </Link>
+
+              {/* Add to Cart Button */}
+              <button
+                onClick={handleAdd}
+                className="w-full mt-auto bg-black text-white py-3 text-md font-semibold hover:bg-red-600 transition-colors duration-200"
+              >
+                ADD TO CART
+              </button>
+            </div>
+          );
+        })}
+      </div>
+      <Pagination></Pagination>
+    </div>
+  );
+}

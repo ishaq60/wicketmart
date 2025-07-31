@@ -7,6 +7,8 @@ import useAllProducts from "@/app/Hooks/useAllProducts";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
 import { addToCart } from "./store/cartSlice";
+import { toast } from "react-toastify";
+
 
 // ⭐ Star Rating Component
 const StarRating = ({ rating = 0 }) => {
@@ -60,6 +62,7 @@ export default function TrendingProduct() {
               image: product.images?.[0],
               quantity: 1, // ✅ always provide quantity
             }));
+              toast.success(`${product.name} added to cart!`);
           };
 
           return (

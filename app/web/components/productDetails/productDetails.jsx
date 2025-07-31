@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { Star, StarHalf, Minus, Plus, Truck } from "lucide-react";
 import Image from "next/image";
+import { useDispatch } from "react-redux";
 
 const ProductDetails = ({ product }) => {
   const [selectedImage, setSelectedImage] = useState(0);
@@ -22,13 +23,25 @@ const ProductDetails = ({ product }) => {
     originalPrice,
     price,
     ratings,
-    reviews,
+    reviews = [],
     taxInclusive,
     totalReviews,
     uname,
     _id,
     images = [],
   } = product || {};
+ const dispatch = useDispatch();
+  const handleAdd = () => {
+    dispatch(
+      addToCart({
+        id: _id,
+        name: name,
+        price: price,
+        image: images?.[0],
+        quantity: 1, // ✅ always provide quantity
+      })
+    );
+  };
 
   const mainImage = images[selectedImage];
 
@@ -44,17 +57,13 @@ const ProductDetails = ({ product }) => {
       <div className="flex items-center gap-1">
         {[...Array(5)].map((_, i) => {
           if (i < fullStars) {
-            return (
-              <Star key={i} className="w-6 h-6 fill-black text-black" />
-            );
+            return <Star key={i} className="w-6 h-6 fill-black text-black" />;
           } else if (i === fullStars && halfStar) {
             return (
               <StarHalf key={i} className="w-6 h-6 fill-black text-black" />
             );
           } else {
-            return (
-              <Star key={i} className="w-6 h-6 text-gray-300" />
-            );
+            return <Star key={i} className="w-6 h-6 text-gray-300" />;
           }
         })}
       </div>
@@ -122,7 +131,9 @@ const ProductDetails = ({ product }) => {
           {/* Price */}
           <div className="space-y-2">
             <div className="flex items-center gap-3">
-              <span className="text-3xl font-bold text-gray-900">{price.toLocaleString()} Tk</span>
+              <span className="text-3xl font-bold text-gray-900">
+                {price.toLocaleString()} Tk
+              </span>
               <span className="text-lg text-gray-500 line-through">
                 {originalPrice.toLocaleString()} Tk
               </span>
@@ -145,7 +156,9 @@ const ProductDetails = ({ product }) => {
               You save: {discount.toLocaleString()} Tk ({discountPercentage}%)
             </div>
             {taxInclusive && (
-              <div className="text-xl text-gray-600">(Inclusive of all taxes)</div>
+              <div className="text-xl text-gray-600">
+                (Inclusive of all taxes)
+              </div>
             )}
           </div>
 
@@ -153,13 +166,19 @@ const ProductDetails = ({ product }) => {
 
           {/* Description */}
           <div className="space-y-2">
-            <h3 className="font-semibold text-2xl text-gray-900">Description :</h3>
-            <p className="text-gray-700 text-xl leading-relaxed">{description}</p>
+            <h3 className="font-semibold text-2xl text-gray-900">
+              Description :
+            </h3>
+            <p className="text-gray-700 text-xl leading-relaxed">
+              {description}
+            </p>
           </div>
 
           {/* Offers and Discounts */}
           <div className="space-y-3">
-            <h3 className="font-semibold text-gray-900">Offers and Discounts</h3>
+            <h3 className="font-semibold text-gray-900">
+              Offers and Discounts
+            </h3>
             <div className="flex gap-3">
               <button className="px-4 py-4 border border-gray-300 rounded-lg text-xl hover:bg-red-500">
                 No Cost EMI on Credit Card
@@ -190,7 +209,9 @@ const ProductDetails = ({ product }) => {
                 >
                   <Minus className="w-8 h-6" />
                 </button>
-                <span className="px-4 py-2 min-w-[3rem] text-center">{quantity}</span>
+                <span className="px-4 py-2 min-w-[3rem] text-center">
+                  {quantity}
+                </span>
                 <button
                   onClick={incrementQuantity}
                   className="p-2 hover:bg-gray-100 rounded-r-lg"
@@ -201,7 +222,10 @@ const ProductDetails = ({ product }) => {
               </div>
             </div>
 
-            <button className="w-full bg-black text-2xl text-white py-4 px-6 rounded-lg font-semibold hover:bg-red-500 transition-colors">
+            <button
+              onClick={handleAdd}
+              className="w-full bg-black text-2xl text-white py-4 px-6 rounded-lg font-semibold hover:bg-red-500 transition-colors"
+            >
               ADD TO CART
             </button>
           </div>
