@@ -16,7 +16,7 @@ export default function Home() {
       <div className="w-full mb-10">
         <Hero></Hero>
       </div>
-      <div className="mb-100">
+      <div className="mb-60">
        <Productpages></Productpages>
 
        <TrendingProduct></TrendingProduct>

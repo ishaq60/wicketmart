@@ -48,15 +48,15 @@ const FeaturedProducts = () => {
             spaceBetween: 30,
           },
           1024: {
-            slidesPerView: 3,
+            slidesPerView: 4,
             spaceBetween: 20,
           },
         }}
       >
-{products.map((product) => (
+{products.slice(0,8).map((product) => (
   <SwiperSlide key={product?._id}>
     <Link href={`/sProduct/${product?._id}`}>
-      <div className="w-full sm:w-[280px] lg:w-[500px] mt-4 h-[400px] bg-white mb-8 rounded-xl shadow-lg hover:shadow-xl mx-auto overflow-hidden transition-all group">
+      <div className="w-full sm:w-[280px] lg:w-[400px] mt-4 h-[400px] bg-white mb-8 rounded-xl shadow-lg hover:shadow-xl mx-auto overflow-hidden transition-all group">
         {/* Image */}
         <h2 className="text-center text-lg font-semibold line-clamp-2 group-hover:text-red-500">
           {product?.name}

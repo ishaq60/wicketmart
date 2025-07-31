@@ -108,7 +108,7 @@ const ProductDetails = ({ product }) => {
 
           {/* Brand and type */}
           <div className="text-gray-800 text-2xl">
-            {handleType} Cricket bat, Brand: {brand}
+            {handleType} {category}, Brand: {brand}
           </div>
 
           {/* Rating */}

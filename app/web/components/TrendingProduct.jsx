@@ -49,7 +49,7 @@ export default function TrendingProduct() {
       </h1>
 
       <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 mt-20 justify-center items-stretch">
-        {products.map((product) => (
+        {products.slice(0,8).map((product) => (
           <Link key={product._id} href={`/sProduct/${product._id}`}>
             <div className="w-full max-w-[300px] h-[520px] bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col justify-between cursor-pointer">
               {/* Image */}
