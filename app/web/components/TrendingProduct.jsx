@@ -1,92 +1,108 @@
-"use client"
-import React from 'react';
-import { Star } from 'lucide-react';
-import Link from 'next/link';
+"use client";
+import React from "react";
+import { Star } from "lucide-react";
+import Link from "next/link";
+import useAllProducts from "@/app/Hooks/useAllProducts";
+import Image from "next/image";
 
-export default function() {
-    const product=[1,2,3,4,5,6,7,8]
+// Star Rating Component
+const StarRating = ({ rating = 0 }) => {
+  const filledStars = Math.floor(rating);
+  const halfStar = rating % 1 >= 0.5;
+
   return (
-  <div className='container mx-auto'>
-    <h1 className='text-4xl mt-20 font-bold text-center'>Trending Products</h1>
-  <div className='grid sm:grid-cols-2 gap-y-4 md:grid-cols-4 lg:grid-cols-4 justify-center items-center mt-20'>
-      {
-        product.map(product=>(
-  <Link href={`/sProduct/:id`}>
-              <div key={product} className="w-[350px] bg-white border border-gray-200 rounded-lg h-[470px] shadow-sm ">
-      {/* Product Images */}
-      <div className="relative bg-gray-50 p-16">
-        <div className="flex justify-center items-center space-x-2">
-          {/* Three bat images side by side */}
-          <div className="w-16 h-32 bg-gradient-to-b from-yellow-100 to-yellow-200 rounded-sm relative">
-            <div className="absolute inset-2 bg-gradient-to-b from-amber-50 to-amber-100 rounded-sm">
-              <div className="w-full h-8 bg-black rounded-sm mb-2 flex items-center justify-center">
-                <span className="text-white text-xs font-bold">SG</span>
-              </div>
-          
-            </div>
-          </div>
-          
-          <div className="w-16 h-32 bg-gradient-to-b from-yellow-100 to-yellow-200 rounded-sm relative">
-            <div className="absolute inset-2 bg-gradient-to-b from-amber-50 to-amber-100 rounded-sm">
-              <div className="w-full h-8 bg-black rounded-sm mb-2 flex items-center justify-center">
-                <span className="text-white text-xs font-bold">SG</span>
-              </div>
-              <div className="w-full flex-1 bg-gradient-to-b from-amber-100 to-yellow-200"></div>
-            </div>
-          </div>
-          
-          <div className="w-16 h-32 bg-gradient-to-b from-yellow-100 to-yellow-200 rounded-sm relative">
-            <div className="absolute inset-2 bg-gradient-to-b from-amber-50 to-amber-100 rounded-sm">
-              <div className="w-full h-8 bg-black rounded-sm mb-2 flex items-center justify-center">
-                <span className="text-white text-xs font-bold">SG</span>
-              </div>
-              <div className="w-full flex-1 bg-gradient-to-b from-amber-100 to-yellow-200"></div>
-            </div>
-          </div>
-        </div>
+    <div className="flex items-center gap-0.5">
+      {[...Array(5)].map((_, i) => {
+        const isFilled = i < filledStars;
+        const isHalf = i === filledStars && halfStar;
+
+        return (
+          <Star
+            key={i}
+            className={`w-4 h-4 ${
+              isFilled || isHalf
+                ? "fill-yellow-500 text-yellow-500"
+                : "text-gray-300"
+            }`}
+          />
+        );
+      })}
+    </div>
+  );
+};
+
+export default function TrendingProduct() {
+  const { products } = useAllProducts();
+
+  if (!products || products.length === 0) {
+    return (
+      <div className="w-full py-16 flex justify-center items-center">
+        <p className="text-gray-500">No trending products available.</p>
       </div>
+    );
+  }
 
-      {/* Product Details */}
-      <div className="p-4">
-        {/* Product Title */}
-        <h3 className="text-sm font-medium text-gray-900 mb-2">
-          GM Chrome 707...
-        </h3>
+  return (
+    <div className="container mx-auto px-4">
+      <h1 className="text-4xl mt-20 font-bold text-center">
+        Trending Products
+      </h1>
 
-        {/* Rating */}
-        <div className="flex items-center mb-2">
-          <div className="flex space-x-0.5">
-            <Star className="w-3 h-3 fill-red-500 text-red-500" />
-            <Star className="w-3 h-3 fill-red-500 text-red-500" />
-            <Star className="w-3 h-3 fill-gray-300 text-gray-300" />
-            <Star className="w-3 h-3 fill-gray-300 text-gray-300" />
-            <Star className="w-3 h-3 fill-gray-300 text-gray-300" />
-          </div>
-          <span className="text-xs text-gray-500 ml-1">(1)</span>
-        </div>
+      <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 mt-20 justify-center items-stretch">
+        {products.map((product) => (
+          <Link key={product._id} href={`/sProduct/${product._id}`}>
+            <div className="w-full max-w-[300px] h-[520px] bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col justify-between cursor-pointer">
+              {/* Image */}
+              <div className="bg-gray-50 flex justify-center items-center py-6">
+                <Image
+                  src={product?.images?.[0] || "/placeholder.jpg"}
+                  width={150}
+                  height={170}
+                  alt="product image"
+                  className="object-contain h-[170px] w-auto"
+                />
+              </div>
 
-        {/* Product Description */}
-        <p className="text-xs text-gray-600 mb-3">
-          Handle : short handle Weight 1170-1230 Bat...
-        </p>
+              {/* Details */}
+              <div className="p-4 flex flex-col mt-2 flex-grow justify-between">
+                {/* Title */}
+                <h3 className="text-sm font-medium text-gray-900 mb-1 truncate">
+                  {product?.name}
+                </h3>
 
-        {/* Pricing */}
-        <div className="flex items-center space-x-2 mb-4">
-          <span className="text-sm text-gray-500 line-through">₹18,000</span>
-          <span className="text-lg font-bold text-gray-900">₹11,700</span>
-        </div>
+                {/* Rating */}
+                <div className="flex items-center mb-2">
+                  <StarRating rating={product?.averageRating || 0} />
+                  <span className="text-sm text-gray-500 ml-1">
+                    ({product?.totalReviews || 0})
+                  </span>
+                </div>
 
-        {/* Add to Cart Button */}
-        <button className="w-full bg-black text-white py-3 px-4 text-md font-semibold hover:bg-red-600 transition-colors duration-200">
-          ADD TO CART
-        </button>
+                {/* Description */}
+                <p className="text-sm mt-2 text-gray-600 line-clamp-2">
+                  {product?.description}
+                </p>
+
+                {/* Pricing */}
+                <div className="flex items-center mt-4 space-x-2">
+                 
+                  <span className="text-lg font-bold text-gray-900">
+                    ৳{product?.price || "11700"}
+                  </span>
+                   <span className="text-sm text-gray-500 [text-decoration-color:theme(colors.red.500)] line-through">
+                    ৳{product?.originalPrice || "18000"}
+                  </span>
+                </div>
+
+                {/* Button */}
+                <button className="w-full mt-auto bg-black text-white py-3 text-md font-semibold hover:bg-red-600 transition-colors duration-200">
+                  ADD TO CART
+                </button>
+              </div>
+            </div>
+          </Link>
+        ))}
       </div>
     </div>
-  
-  </Link>
-        ))
-    }
-  </div>
-  </div>
   );
 }

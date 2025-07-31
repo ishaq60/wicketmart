@@ -1,71 +1,95 @@
 "use client";
-import "swiper/css/pagination"; // ⬅️ Required for dots 
-import React from "react"; 
-import { Swiper, SwiperSlide } from "swiper/react"; 
-import { Autoplay, Pagination } from "swiper/modules";
-import "swiper/css"; 
-import "swiper/css/autoplay"; 
-import Image from "next/image"; 
-import oneimage from "../../../public/Image/Cricket-wepon/03.jpg"; 
-import Link from "next/link";
 
-const FeaturedProducts = () => { 
-  const products = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-  
-  return ( 
-    <div className="mt-12 sm:mt-16 md:mt-20 px-2 sm:px-4"> 
-      <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold"> 
-        Featured Products 
-      </h1> 
-      <Swiper 
-        spaceBetween={5} 
-        slidesPerView={2} 
-        centeredSlides={true} 
-        autoplay={{ delay: 2000, disableOnInteraction: false }} 
-        pagination={{ clickable: true }} // 👈 enable clickable dots 
-        loop={true} 
-        modules={[Autoplay, Pagination]} // 👈 include Pagination module 
-        className="mt-4 sm:mt-6 md:mt-8" 
-        breakpoints={{ 
-          640: { 
-            slidesPerView: 1, 
-            spaceBetween: 20, 
-          }, 
-          1024: { 
-            slidesPerView: 3, 
-            spaceBetween: 30, 
-          }, 
-        }} 
-      > 
-        {/* SwiperSlide content */}
-        {products.map((product, index) => ( 
-          <SwiperSlide key={index}> 
-           <Link href={`/sProduct/:id`}>
-            <div className="slide-card group w-full max-w-[500px] sm:max-w-[350px] md:max-w-[600px] h-auto sm:h-[350px] md:h-[500px] mb-8 sm:mb-10 md:mb-12 mx-auto transition-all duration-300 ease-in-out bg-gray-200 p-4 sm:p-6 md:p-8 rounded-xl text-center opacity-60 "> 
-              <div className="card "> 
-                <div className="card-body items-center text-center p-3 sm:p-4 md:p-6"> 
-                  <h2 className="card-title text-xl font-semibold sm:text-lg md:text-xl group-hover:text-red-500"> 
-                    SG klr Xtreme English Willow Short Handle Cricket bat 
-                  </h2>
-                  <Image src={oneimage} alt="oneimage" />
-                  <div className="flex items-baseline space-x-2 "> 
-                    <span className="text-3xl font-bold text-black group-hover:text-red-500"> 
-                      ৳14,950 
-                    </span> 
-                    <span className="text-2xl line-through text-black group-hover:text-red-500"> 
-                      ৳23,000 
-                    </span> 
-                  </div> 
-                </div> 
-              </div> 
-            </div>
-           
-           </Link>
-          </SwiperSlide> 
-        ))} 
-      </Swiper> 
-    </div> 
-  ); 
+import "swiper/css";
+import "swiper/css/autoplay";
+import "swiper/css/pagination";
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay, Pagination } from "swiper/modules";
+import Image from "next/image";
+import Link from "next/link";
+import useAllProducts from "@/app/Hooks/useAllProducts";
+import Loading from "./loading";
+
+const FeaturedProducts = () => {
+  const { products } = useAllProducts();
+  console.log(products)
+
+  if (!products || products.length === 0) {
+    return (
+      <div className="w-full py-16 flex justify-center items-center">
+           <Loading></Loading>
+      </div>
+    );
+  }
+
+  return (
+    <div className="mt-12 sm:mt-16 md:mt-20 px-2 sm:px-4">
+      <h1 className="text-center text-xl sm:text-2xl md:text-3xl font-bold">
+        Featured Products
+      </h1>
+
+      <Swiper
+        spaceBetween={10}
+        slidesPerView={1}
+        centeredSlides={true}
+        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        pagination={{ clickable: true }}
+        loop={true}
+        modules={[Autoplay, Pagination]}
+        className="mt-6"
+        breakpoints={{
+          640: {
+            slidesPerView: 1,
+            spaceBetween: 20,
+          },
+          768: {
+            slidesPerView: 2,
+            spaceBetween: 30,
+          },
+          1024: {
+            slidesPerView: 3,
+            spaceBetween: 20,
+          },
+        }}
+      >
+{products.map((product) => (
+  <SwiperSlide key={product?._id}>
+    <Link href={`/sProduct/${product?._id}`}>
+      <div className="w-full sm:w-[280px] lg:w-[500px] mt-4 h-[400px] bg-white mb-8 rounded-xl shadow-lg hover:shadow-xl mx-auto overflow-hidden transition-all group">
+        {/* Image */}
+        <h2 className="text-center text-lg font-semibold line-clamp-2 group-hover:text-red-500">
+          {product?.name}
+        </h2>
+        <div className="w-full mt-2 p-2 h-[280px] relative">
+          <Image
+            src={product?.images[0]}
+            alt={product?.name}
+            fill
+            className="object-cover px-2 h-full"
+          />
+        </div>
+
+        <div className="p-4 flex flex-col justify-between h-[200px]">
+          <div className="flex justify-center items-center mt-2 space-x-2">
+            <span className="text-xl font-bold text-black group-hover:text-red-500">
+              ৳{product?.price}
+            </span>
+            <span className="text-sm line-through [text-decoration-color:theme(colors.red.500)] text-gray-700 group-hover:text-red-500">
+              ৳{product?.originalPrice}
+            </span>
+          </div>
+        </div>
+      </div>
+    </Link>
+  </SwiperSlide>
+))}
+
+
+
+      </Swiper>
+    </div>
+  );
 };
 
 export default FeaturedProducts;
