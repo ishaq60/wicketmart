@@ -5,10 +5,11 @@ import { ShoppingCart, User, Mail } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
+import Link from 'next/link';
 
 export default function CheckoutForm() {
    const { data: session, status } = useSession();
-    console.log(session.user.name);
+    console.log(session?.user?.name);
 const [formData, setFormData] = useState({
   name: session?.user?.name || '',
   email: session?.user?.email || ''
@@ -46,7 +47,8 @@ const [formData, setFormData] = useState({
     const orderData = {
       customer: formData,
       items: cartItems,
-      total: total
+      total: total,
+      
     };
 
     try {
@@ -77,7 +79,10 @@ const [formData, setFormData] = useState({
     <div className="min-h-screen bg-gray-50 py-8 px-4">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-2">Checkout</h1>
+       <div className='flex justify-between'>
+           <h1 className="text-3xl font-bold text-gray-900 mb-2">Checkout</h1>
+           <Link className='bg-red-500 text-white underline p-2 font-bold rounded-xl px-4' href={"/orders"}>See Orders</Link>
+       </div>
           <p className="text-gray-600">Complete your order</p>
         </div>
 

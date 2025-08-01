@@ -1,4 +1,5 @@
 import { ChevronDown, MapPin } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 const Topheader = () => {
@@ -28,12 +29,14 @@ const Topheader = () => {
             <span>BD</span>
             <ChevronDown size={14} />
           </div>
+          <Link href={"/signup"}>
           <span
             className="text-md font-medium cursor-pointer hover:text-gray-300 px-4 py-1"
             style={{ backgroundColor: "rgb(75, 66, 66)" }}
           >
             Sign Up
           </span>
+          </Link>
         </div>
       </div>
     </div>

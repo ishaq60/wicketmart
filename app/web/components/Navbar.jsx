@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Search, ShoppingCart, User, Menu, X } from "lucide-react";
+import { Search, ShoppingCart, User, Menu, X, LayoutDashboard } from "lucide-react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FaUserAlt } from "react-icons/fa";
 import { IoCart } from "react-icons/io5";
@@ -124,7 +124,7 @@ const Navbar = () => {
 
                 {/* User Dropdown Menu */}
                 {isUserMenuOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-[300px] h-[370px] p-4 bg-[#121212] text-white rounded-lg shadow-lg z-50">
+                  <div className="absolute right-0 top-full mt-1 w-[300px] h-[375px] p-2 bg-[#121212] text-white rounded-lg shadow-lg z-50">
                     <div className="p-4 border-b border-gray-700">
                       <h3 className="font-semibold text-lg text-center">
                         Welcome!
@@ -134,27 +134,34 @@ const Navbar = () => {
                         log in.
                       </p>
                     </div>
-                    <div className="py-2">
+                    <div className="py-1">
                       <a
                         href="/profile"
-                        className="flex items-center text-md px-4 py-3 hover:bg-[#ed1c24] transition-colors"
+                        className="flex items-center text-md px-4 py-2 hover:bg-[#ed1c24] transition-colors"
                       >
                         <User size={35} className="mr-3" />
                         profile
                       </a>
                       <a
                         href="/orders"
-                        className="flex items-center  text-xl px-4 py-3 hover:bg-[#ed1c24] transition-colors"
+                        className="flex items-center  text-xl px-4 py-2 hover:bg-[#ed1c24] transition-colors"
                       >
                         <div className="w-4 h-4 mr-3">📋</div>
                         orders
                       </a>
                       <a
                         href="/cart"
-                        className="flex items-center px-4  text-xl py-3 hover:bg-[#ed1c24] transition-colors"
+                        className="flex items-center px-4  text-xl py-2 hover:bg-[#ed1c24] transition-colors"
                       >
                         <ShoppingCart size={36} className="mr-3" />
                         cart
+                      </a>
+                      <a
+                        href="/dashboard"
+                        className="flex items-center px-4  text-xl py-2 hover:bg-[#ed1c24] transition-colors"
+                      >
+                        <LayoutDashboard size={36} className="mr-3" />
+                       Dashboard
                       </a>
 
                       {status !== "authenticated" ? (

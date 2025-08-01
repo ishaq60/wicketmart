@@ -8,7 +8,7 @@ export async function middleware(request) {
   const token = await getToken({ req: request, secret });
   const { pathname } = request.nextUrl;
 
-  const protectedRoutes = ["/checkout", "/dashboard/admin"];
+  const protectedRoutes = ["/checkout","/orders", "/dashboard/admin"];
 
   // 🔒 If no token and accessing a protected route
   if (!token && protectedRoutes.some((route) => pathname.startsWith(route))) {
