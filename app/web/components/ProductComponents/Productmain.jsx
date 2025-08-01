@@ -11,9 +11,8 @@ const [maxPrice, setMaxPrice] = useState(0);
 const [minRating, setMinRating] = useState(0);
 const [exactRating,setExactRating]=useState()
 console.log(minRating)
-     console.log(selectedCategory)
-     console.log("min and max fffffrom main",minPrice,maxPrice,minRating)
-     console.log(exactRating)
+   
+   
     return (
         <div>
           <div className="min-h-screen">
