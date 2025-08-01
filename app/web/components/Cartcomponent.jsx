@@ -36,18 +36,21 @@ const Cartcomponent = () => {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:space-x-12 space-y-4 sm:space-y-0 mt-8">
         <h1 className="text-3xl font-bold">Shopping Cart</h1>
-        <Link href={"/products"} className="underline  mt-1 hover:text-red-500 text-xl">
+        <Link
+          href={"/products"}
+          className="underline  mt-1 hover:text-red-500 text-xl"
+        >
           Continue Shopping
         </Link>
       </div>
 
       {/* Cart and Summary */}
       <div className="flex flex-col lg:flex-row justify-between gap-8">
-    {
-  cartItems.length === 0 && (
-    <h1 className="text-red-500 text-center text-2xl m-15">No Item Found in Cart</h1>
-  )
-}
+        {cartItems.length === 0 && (
+          <h1 className="text-red-500 text-center text-2xl m-15">
+            No Item Found in Cart
+          </h1>
+        )}
 
         {/* Cart Item */}
         <div className="max-w-[750px] gap-y-5  h-auto mt-12 bg-white border border-gray-200 rounded-lg shadow-sm">
@@ -71,7 +74,10 @@ const Cartcomponent = () => {
                   <h2 className="text-lg font-medium text-gray-900 leading-tight">
                     {cart.name}
                   </h2>
-                  <button onClick={() => dispatch(removeFromCart(cart?.id))} className="text-red-500 hover:text-black ml-4">
+                  <button
+                    onClick={() => dispatch(removeFromCart(cart?.id))}
+                    className="text-red-500 hover:text-black ml-4"
+                  >
                     <Trash2 size={20} />
                   </button>
                 </div>
@@ -79,7 +85,9 @@ const Cartcomponent = () => {
                 {/* Price Section */}
                 <div className="mb-6">
                   <div className="flex items-center space-x-3">
-                    <span className="text-gray-600 text-sm font-medium">PRICE:</span>
+                    <span className="text-gray-600 text-sm font-medium">
+                      PRICE:
+                    </span>
                     <span className="text-xl font-semibold text-gray-900">
                       ৳{cart.price.toLocaleString()}
                     </span>
@@ -94,7 +102,9 @@ const Cartcomponent = () => {
                 {/* Quantity Section */}
                 <div className="mb-6">
                   <div className="flex items-center space-x-4">
-                    <span className="text-gray-600 text-sm font-medium">QTY:</span>
+                    <span className="text-gray-600 text-sm font-medium">
+                      QTY:
+                    </span>
                     <button
                       onClick={() => handleQuantityChange(cart.id, -1)}
                       className="w-8 h-8 border border-gray-300 rounded flex items-center justify-center hover:bg-gray-50"
@@ -116,9 +126,14 @@ const Cartcomponent = () => {
                 {/* Total Section */}
                 <div className="mt-auto">
                   <div className="flex items-center space-x-3">
-                    <span className="text-gray-600 text-sm font-medium">TOTAL:</span>
+                    <span className="text-gray-600 text-sm font-medium">
+                      TOTAL:
+                    </span>
                     <span className="text-xl font-semibold text-gray-900">
-                      ৳{((cart.price) * (quantities[cart.id] || 1)).toLocaleString()}
+                      ৳
+                      {(
+                        cart.price * (quantities[cart.id] || 1)
+                      ).toLocaleString()}
                     </span>
                   </div>
                 </div>
@@ -131,7 +146,8 @@ const Cartcomponent = () => {
         <div className="w-full max-w-[650px] mt-12 bg-white p-6 border border-gray-200 rounded-lg shadow-sm">
           {/* Header */}
           <h2 className="text-lg font-semibold text-black mb-6">
-            Order Summary ({cartItems.length} item{cartItems.length > 1 ? "s" : ""})
+            Order Summary ({cartItems.length} item
+            {cartItems.length > 1 ? "s" : ""})
           </h2>
 
           {/* Price Details */}
@@ -141,7 +157,13 @@ const Cartcomponent = () => {
               <span className="text-black font-medium">
                 ৳
                 {cartItems
-                  .reduce((acc, cur) => acc + (cur.originalPrice || cur.price) * (quantities[cur.id] || 1), 0)
+                  .reduce(
+                    (acc, cur) =>
+                      acc +
+                      (cur.originalPrice || cur.price) *
+                        (quantities[cur.id] || 1),
+                    0
+                  )
                   .toLocaleString()}
               </span>
             </div>
@@ -154,7 +176,8 @@ const Cartcomponent = () => {
                   .reduce(
                     (acc, cur) =>
                       acc +
-                      ((cur.originalPrice || cur.price) - cur.price) * (quantities[cur.id] || 1),
+                      ((cur.originalPrice || cur.price) - cur.price) *
+                        (quantities[cur.id] || 1),
                     0
                   )
                   .toLocaleString()}
@@ -173,15 +196,22 @@ const Cartcomponent = () => {
           {/* Total Price */}
           <div className="mb-2">
             <div className="flex justify-between items-center">
-              <span className="text-black font-semibold text-lg">Total Price</span>
+              <span className="text-black font-semibold text-lg">
+                Total Price
+              </span>
               <span className="text-black font-semibold text-lg">
                 ৳
                 {cartItems
-                  .reduce((acc, cur) => acc + cur.price * (quantities[cur.id] || 1), 0)
+                  .reduce(
+                    (acc, cur) => acc + cur.price * (quantities[cur.id] || 1),
+                    0
+                  )
                   .toLocaleString()}
               </span>
             </div>
-            <p className="text-sm text-gray-600 mt-1">(Inclusive of all taxes)</p>
+            <p className="text-sm text-gray-600 mt-1">
+              (Inclusive of all taxes)
+            </p>
           </div>
 
           {/* Coupon Code Section */}
@@ -199,9 +229,11 @@ const Cartcomponent = () => {
           </div>
 
           {/* Checkout Button */}
-          <button className="w-full mt-6 bg-black text-white py-4 px-4 text-md font-semibold hover:bg-red-600 transition-colors duration-200">
-            Checkout
-          </button>
+          <Link href={"/checkout"}>
+            <button className="w-full mt-6 bg-black text-white py-4 px-4 text-md font-semibold hover:bg-red-600 transition-colors duration-200">
+              Checkout
+            </button>
+          </Link>
           <div className="mt-4 m-2">
             <Image
               src={cartiamge}

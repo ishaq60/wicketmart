@@ -19,7 +19,7 @@ export default function AppProvider({ children }) {
       
         <Navbar></Navbar>
         {children}
-           <ToastContainer />
+           <ToastContainer  position="top-center" autoClose={3000} />
       </QueryClientProvider>
       <Footer></Footer>
       </SessionProvider>

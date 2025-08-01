@@ -1,30 +1,35 @@
 import { NextResponse } from "next/server";
 import { getToken } from "next-auth/jwt";
 
+// Load secret from environment
 const secret = process.env.NEXTAUTH_SECRET;
 
 export async function middleware(request) {
   const token = await getToken({ req: request, secret });
-console.log(token)
+  const { pathname } = request.nextUrl;
 
-  const url = request.nextUrl.pathname;
+  const protectedRoutes = ["/checkout", "/dashboard/admin"];
 
-  // Must be authenticated for admin or doctor dashboard
-  if (!token) {
-    return NextResponse.redirect(new URL("/login", request.url));
+  // 🔒 If no token and accessing a protected route
+  if (!token && protectedRoutes.some((route) => pathname.startsWith(route))) {
+    const loginUrl = new URL("/login", request.url);
+    loginUrl.searchParams.set("callbackUrl", pathname); // ✅ preserve destination
+    return NextResponse.redirect(loginUrl);
   }
 
-  if (url.startsWith("/dashboard/admin") && token.type !== "admin") {
+  // 🔐 Restrict /dashboard/admin to admin users
+  if (pathname.startsWith("/dashboard/admin") && token?.type !== "admin") {
     return NextResponse.redirect(new URL("/unauthorized", request.url));
   }
 
-  if (url.startsWith("/dashboard/doctor") && token.type !== "doctor") {
-    return NextResponse.redirect(new URL("/unauthorized", request.url));
-  }
-
+  // ✅ Allow access
   return NextResponse.next();
 }
 
+// ✅ Define routes where middleware runs
 export const config = {
-  matcher: ["/dashboard/admin/:path*", "/dashboard/doctor/:path*"],
+  matcher: [
+    "/checkout",
+    "/dashboard/admin/:path*",
+  ],
 };
