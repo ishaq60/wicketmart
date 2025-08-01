@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { Slider } from "@/components/ui/slider";
 import { cn } from "@/lib/utils";
 import {
@@ -13,25 +13,39 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-
-// import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { Star } from "lucide-react";
-const ProductSlice = ({ className, ...props }) => {
+
+const ProductSlice = ({
+  className,
+  setSelectedCategory,
+  minPrice,
+  maxPrice,
+  setMaxPrice,
+  setMinPrice,
+  selectedCategory,
+setMinRating ,
+setExactRating,
+  onCategoryChange,
+  ...props
+}) => {
   const categories = [
+    "All",
+    "Bat",
+    "Ball",
+    "Bag",
+    "Helmet",
     "Cricket Kits",
     "Batting Gloves",
     "Batting Pads",
-    "Bats",
-    "Bags",
-    "Helmets",
-    "Balls",
+
     "Stumps",
-    "Shoes",
+    "Shoe",
     "Clothing",
     "Accessories",
   ];
-    const StarRating = ({ rating = 2 }) => {
+
+  const StarRating = ({ rating = 2 }) => {
     return (
       <div className="flex items-center gap-1">
         {[...Array(5)].map((_, i) => (
@@ -45,57 +59,80 @@ const ProductSlice = ({ className, ...props }) => {
       </div>
     );
   };
+
+  // ✅ State for selected category
+
+  // ✅ Called when category changes
+  const handleCategoryChange = (value) => {
+    setSelectedCategory(value);
+    if (onCategoryChange) {
+      onCategoryChange(value); // send up to parent
+    }
+  };
+  console.log(minPrice, maxPrice);
   return (
     <div className="p-4 bg-white rounded-md">
-      <h1 className="text-3xl text-center font-bold text-[#414141] mb-4">
-        Price
-      </h1>
+      <h1 className="text-3xl text-center font-bold text-[#414141] ">Price</h1>
 
       <div>
         <Slider
           defaultValue={[50]}
           max={100}
           step={1}
-          className={cn("text-center h-[20px] w-[50%] mx-auto", className)}
+          className={cn("text-center h-[10px] w-[50%] mx-auto", className)}
           {...props}
         />
       </div>
 
-      <div className="mt-10 flex justify-center items-center gap-x-4">
-        <Select>
-          <SelectTrigger className="w-[120px]">
-            <SelectValue placeholder="Select a price" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel>Prices</SelectLabel>
-              <SelectItem value="5000">5000</SelectItem>
-              <SelectItem value="1000">1000</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
+     <div className="mt-2 flex justify-center items-center gap-x-4">
+  <Select onValueChange={(value) => setMinPrice(Number(value))}>
+    <SelectTrigger className="w-[120px]">
+      <SelectValue placeholder="Min Price" />
+    </SelectTrigger>
+    <SelectContent className="z-[1000]">
+      <SelectGroup>
+        <SelectLabel>Prices</SelectLabel>
+        <div className="bg-gray-600 text-white">
+          <SelectItem value="100">100</SelectItem>
+          <SelectItem value="5000">5000</SelectItem>
+          <SelectItem value="10000">10000</SelectItem>
+        </div>
+      </SelectGroup>
+    </SelectContent>
+  </Select>
 
-        <h1 className="text-2xl">To</h1>
+  <h1 className="text-2xl">To</h1>
 
-        <Select>
-          <SelectTrigger className="w-[200px]">
-            <SelectValue placeholder="Select a price" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              <SelectLabel className="text-black">Prices</SelectLabel>
-              <SelectItem value="5000">5000</SelectItem>
-              <SelectItem value="1000">1000</SelectItem>
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-      </div>
+  <Select onValueChange={(value) => setMaxPrice(Number(value))}>
+    <SelectTrigger className="w-[200px]">
+      <SelectValue placeholder="Max Price" />
+    </SelectTrigger>
+    <SelectContent className="z-[1000]">
+      <SelectGroup>
+        <SelectLabel>Prices</SelectLabel>
+        <div className="bg-gray-600 text-white">
+          <SelectItem value="5000">5000</SelectItem>
+          <SelectItem value="10000">10000</SelectItem>
+          <SelectItem value="20000">20000</SelectItem>
+        </div>
+      </SelectGroup>
+    </SelectContent>
+  </Select>
+</div>
+
+
       <hr className="w-full border-t-1 mt-12 border-black" />
-      <h1 className="text-3xl ml-8 mt-10 font-bold text-[#414141] mb-4">
+
+      <h1 className="text-3xl ml-8  font-bold relative text-[#414141] mt-4">
         Categories
       </h1>
+
       <div className="flex flex-col gap-4">
-        <RadioGroup className="flex flex-col gap-4" defaultValue="Cricket Kits">
+        <RadioGroup
+          className="flex flex-col gap-4"
+          value={selectedCategory}
+          onValueChange={handleCategoryChange}
+        >
           {categories.map((category, index) => (
             <div key={index} className="flex items-center space-x-3">
               <RadioGroupItem value={category} id={`cat-${index}`} />
@@ -109,25 +146,41 @@ const ProductSlice = ({ className, ...props }) => {
           ))}
         </RadioGroup>
       </div>
-     <hr className="w-full border-t-1 mt-8 border-black" />
+
+      <hr className="w-full border-t-1 mt-8 border-black" />
+
       <h1 className="text-3xl mt-4 text-center font-bold text-[#414141] mb-4">
         Ratings Above
       </h1>
-      <RadioGroup defaultValue="comfortable">
-      <div className="flex items-center gap-3">
-        <RadioGroupItem value="default" id="r1" />
-        <Label htmlFor="r1">4 
-           <Star className="w-4 fill-black"/> & above</Label>
-      </div>
-      <div className="flex items-center gap-3">
-        <RadioGroupItem value="comfortable" id="r2" />
-        <Label htmlFor="r2">3 <Star className="w-4 fill-black"/> & above</Label>
-      </div>
-      <div className="flex items-center gap-3">
-        <RadioGroupItem value="compact" id="r3" />
-        <Label htmlFor="r3">2 <Star className="w-4 fill-black"/> & above</Label>
-      </div>
-    </RadioGroup>
+
+<RadioGroup onValueChange={(value) => setExactRating(Number(value))} defaultValue="">
+  <div className="flex items-center gap-3">
+    <RadioGroupItem value="" id="rAny" />
+    <Label htmlFor="rAny">All Ratings</Label>
+  </div>
+  <div className="flex items-center gap-3">
+    <RadioGroupItem value="5" id="r5" />
+    <Label htmlFor="r5">5⭐</Label>
+  </div>
+  <div className="flex items-center gap-3">
+    <RadioGroupItem value="4" id="r4" />
+    <Label htmlFor="r4">4⭐</Label>
+  </div>
+  <div className="flex items-center gap-3">
+    <RadioGroupItem value="3" id="r3" />
+    <Label htmlFor="r3">3⭐</Label>
+  </div>
+  <div className="flex items-center gap-3">
+    <RadioGroupItem value="2" id="r3" />
+    <Label htmlFor="r3">2⭐</Label>
+  </div>
+  <div className="flex items-center gap-3">
+    <RadioGroupItem value="1" id="r3" />
+    <Label htmlFor="r3">1⭐</Label>
+  </div>
+</RadioGroup>
+
+
     </div>
   );
 };

@@ -10,7 +10,6 @@ import Image from "next/image";
 import Loadingred from "../loadingred";
 import Pagination from "./Pagination";
 import Useproduct from "@/app/Hooks/Useproduct";
-
 // ⭐ Star Rating Component
 const StarRating = ({ rating = 0 }) => {
   const filledStars = Math.floor(rating);
@@ -36,10 +35,11 @@ const StarRating = ({ rating = 0 }) => {
     </div>
   );
 };
-
-export default function ProductCard() {
+// minRating, setMinRating
+export default function ProductCard({selectedCategory,minPrice,maxPrice,minRating,exactRating}) {
+  console.log("in card page",selectedCategory)
  const dispatch = useDispatch();
-
+console.log("api class", minPrice,maxPrice,minPrice)
 const [products, setProducts] = useState([]);
 const [currentPage, setCurrentPage] = useState(1);
 const pageSize = 8;
@@ -50,7 +50,7 @@ const totalPages = Math.ceil(totalProducts / pageSize);
 
 useEffect(() => {
   const fetchProducts = async () => {
-    const res = await fetch(`/api/pagination?page=${currentPage}&pageSize=${pageSize}`);
+    const res = await fetch(`/api/pagination?page=${currentPage}&pageSize=${pageSize}&category=${selectedCategory}&rating=${exactRating}&minPrice=${minPrice}&maxPrice=${maxPrice}`);
     const data = await res.json();
     console.log(data);
     setProducts(data.products);
@@ -58,7 +58,7 @@ useEffect(() => {
   };
 
   fetchProducts();
-}, [currentPage]);
+}, [currentPage,selectedCategory,maxPrice,minPrice,exactRating]);
 
 const handlePageClick = (page) => setCurrentPage(page);
 const handlePrevious = () => currentPage > 1 && setCurrentPage(currentPage - 1);

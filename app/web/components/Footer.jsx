@@ -13,7 +13,7 @@ import {
 
 export default function Footer() {
   return (
-    <div className="bg-black text-white">
+    <div className="bg-black mt-20 text-white">
       {/* Top Features Section */}
       <div className="py-6">
         <div className="max-w-7xl mx-auto px-4">
