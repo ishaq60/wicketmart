@@ -1,32 +1,50 @@
 "use client"
-import { useState } from 'react';
-import Link from 'next/link';
-import { Eye, EyeOff, Lock } from 'lucide-react';
+import { useState } from "react"; // ✅ make sure this is imported
+import { useRouter, useSearchParams } from "next/navigation";
+import { signIn } from "next-auth/react"; // ✅ make sure this is imported too
+import { Eye, EyeOff, Lock } from "lucide-react";
+import Link from "next/link";
+import { toast } from "react-toastify";
 
 export default function Logincomponents() {
   const [showPassword, setShowPassword] = useState(false);
+  const [error, setError] = useState(""); // ✅ this is the missing part
   const [formData, setFormData] = useState({
-    email: '',
-    password: ''
+    email: "",
+    password: "",
   });
   const [rememberMe, setRememberMe] = useState(false);
+
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   const handleInputChange = (e) => {
     setFormData({
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: e.target.value,
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Login data:', formData);
-  };
+    setError(""); // ✅ clears error before trying again
 
-  const handleGoogleSignIn = () => {
-    // Handle Google sign-in
-    console.log('Google sign-in clicked');
+    const { email, password } = formData; // ✅ destructure email & password
+
+    const res = await signIn("credentials", {
+      redirect: false,
+      email,
+      password,
+      callbackUrl,
+    });
+
+    if (res?.ok) {
+      toast.success("user login successfully")
+      router.push(callbackUrl);
+    } else {
+      setError(res?.error || "Invalid email or password");
+    }
   };
 
   return (
@@ -41,7 +59,7 @@ export default function Logincomponents() {
           </h2>
         </div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <form className="mt-8 space-y-6" onSubmit={handleLogin}>
           <div className="space-y-4">
             <div>
               <input
@@ -109,7 +127,7 @@ export default function Logincomponents() {
           </div>
 
           <div>
-            <button
+            <button onSubmit={handleLogin}
               type="submit"
               className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-black hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors"
             >
@@ -120,7 +138,7 @@ export default function Logincomponents() {
           <div>
             <button
               type="button"
-              onClick={handleGoogleSignIn}
+         onClick={() => signIn("google", { callbackUrl })}
               className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-gray-900 hover:bg-red-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 transition-colors"
             >
               <svg className="w-5 h-5 mr-2" viewBox="0 0 24 24">

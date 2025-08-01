@@ -4,6 +4,8 @@ import React, { useState } from "react";
 import { Star, StarHalf, Minus, Plus, Truck } from "lucide-react";
 import Image from "next/image";
 import { useDispatch } from "react-redux";
+import { addToCart } from "../store/cartSlice";
+import toast from "daisyui/components/toast";
 
 const ProductDetails = ({ product }) => {
   const [selectedImage, setSelectedImage] = useState(0);
@@ -40,7 +42,9 @@ const ProductDetails = ({ product }) => {
         image: images?.[0],
         quantity: 1, // ✅ always provide quantity
       })
+   
     );
+        toast.success(' added to cart successfully!');
   };
 
   const mainImage = images[selectedImage];

@@ -2,10 +2,13 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { Eye, EyeOff, Lock, User, Upload } from 'lucide-react';
+import { toast } from 'react-toastify';
+import { searchParams } from 'next/navigation';
 
 export default function Signupcomponent() {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const callbackUrl = searchParams.get("callbackUrl") || "";
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,10 +25,31 @@ export default function Signupcomponent() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
     // Handle form submission
     console.log('Registration data:', formData);
+    const baseUrl= "http://localhost:3000"
+    try {
+  const resp = await fetch(`${baseUrl}/api/signup`, {
+    method: 'POST',
+    body: JSON.stringify(formData),
+    headers: { 'Content-Type': 'application/json' },
+  });
+
+  const result = await resp.json();
+
+  if (!resp.ok) {
+    toast.error(result.error || "Signup failed");
+    return;
+  }
+
+  toast.success("User created successfully");
+   router.push(callbackUrl)
+} catch (error) {
+  console.error('Error during signup:', error);
+  toast.error("Network error. Please try again.");
+}
   };
 
   return (

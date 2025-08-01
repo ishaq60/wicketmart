@@ -7,10 +7,14 @@ import { IoCart } from "react-icons/io5";
 import { ImSearch } from "react-icons/im";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
+import { signOut, useSession } from "next-auth/react";
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  const { data: session, status } = useSession();
+  console.log(status);
 
   const navLinks = [
     { id: "home", name: "Home", href: "/" },
@@ -18,7 +22,7 @@ const Navbar = () => {
     { id: "contact", name: "Contact", href: "/contact" },
     { id: "about", name: "About", href: "/about" },
   ];
-const cartItems = useSelector((state) => state.cart.cartItems);
+  const cartItems = useSelector((state) => state.cart.cartItems);
   const dispatch = useDispatch();
   return (
     <div className="w-full">
@@ -100,7 +104,7 @@ const cartItems = useSelector((state) => state.cart.cartItems);
                 <button className="relative text-[#121212] hover:text-red-600 transition-colors duration-300 p-2 hover:bg-gray-100 rounded-full">
                   <IoCart size={30} />
                   <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-bold">
-                   {cartItems.length}
+                    {cartItems.length}
                   </span>
                 </button>
               </Link>
@@ -120,7 +124,7 @@ const cartItems = useSelector((state) => state.cart.cartItems);
 
                 {/* User Dropdown Menu */}
                 {isUserMenuOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-[300px] h-[350px] p-4 bg-[#121212] text-white rounded-lg shadow-lg z-50">
+                  <div className="absolute right-0 top-full mt-2 w-[300px] h-[370px] p-4 bg-[#121212] text-white rounded-lg shadow-lg z-50">
                     <div className="p-4 border-b border-gray-700">
                       <h3 className="font-semibold text-lg text-center">
                         Welcome!
@@ -152,13 +156,24 @@ const cartItems = useSelector((state) => state.cart.cartItems);
                         <ShoppingCart size={36} className="mr-3" />
                         cart
                       </a>
-                      <a
-                        href="/login"
-                        className="flex items-center px-4 py-3  text-xl hover:bg-[#ed1c24] transition-colors"
-                      >
-                        <div className="w-4 h-4 mr-3">🔓</div>
-                        Login
-                      </a>
+
+                      {status !== "authenticated" ? (
+                        <a
+                          href="/login"
+                          className="flex items-center px-4 py-3 text-xl hover:bg-[#ed1c24] transition-colors"
+                        >
+                          <div className="w-4 h-4 mr-3">🔓</div>
+                          Login
+                        </a>
+                      ) : (
+                        <button
+                          onClick={() => signOut()}
+                          className="flex items-center w-full px-4 py-3 text-xl hover:bg-[#ed1c24] transition-colors"
+                        >
+                          <div className="w-4 h-4 mr-3">🔒</div>
+                          Logout
+                        </button>
+                      )}
                     </div>
                   </div>
                 )}
