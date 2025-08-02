@@ -256,13 +256,23 @@ const Navbar = () => {
                 <User size={20} className="mr-4" />
                 Account
               </a>
-              <a
-                href="/login"
-                className="flex items-center px-6 py-4 hover:bg-[#ed1c24] transition-colors"
-              >
-                <div className="w-5 h-5 mr-4">🔐</div>
-                Login
-              </a>
+               {status !== "authenticated" ? (
+                        <a
+                          href="/login"
+                          className="flex items-center px-4 py-3 text-xl hover:bg-[#ed1c24] transition-colors"
+                        >
+                          <div className="w-4 h-4 mr-3">🔓</div>
+                          Login
+                        </a>
+                      ) : (
+                        <button
+                          onClick={() => signOut()}
+                          className="flex items-center w-full px-4 py-3 text-xl hover:bg-[#ed1c24] transition-colors"
+                        >
+                          <div className="w-4 h-4 mr-3">🔒</div>
+                          Logout
+                        </button>
+                      )}
             </div>
           </div>
         </>

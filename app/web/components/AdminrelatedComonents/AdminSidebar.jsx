@@ -12,8 +12,10 @@ import {
   User, 
   LogOut,
   Menu,
-  X
+  X,
+  HomeIcon
 } from 'lucide-react';
+import { signOut } from 'next-auth/react';
 
 const AdminSidebar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -49,6 +51,10 @@ const menuItems = [
     name: 'Profile',
     href: '/dashboard/admin/profile',
     icon: User
+  },{
+    name:"Home",
+    href:"/",
+    icon:HomeIcon
   }
 ];
 
@@ -117,7 +123,7 @@ const menuItems = [
             })}
                <div className="border-t border-gray-700 pt-4">
               <button
-                onClick={handleLogout}
+                onClick={() => signOut({ callbackUrl: "/" })}
                 className="flex items-center w-full px-4 py-3 bg-black text-white text-sm font-medium  rounded-lg hover:bg-red-700 transition-colors duration-200"
               >
                 <LogOut className="mr-3 h-5 w-5" />

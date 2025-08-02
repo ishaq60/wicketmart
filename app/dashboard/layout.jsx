@@ -1,6 +1,6 @@
 // app/admin/layout.js
 
-import AdminSidebar from "../components/AdminrelatedComonents/AdminSidebar";
+import AdminSidebar from "../web/components/AdminrelatedComonents/AdminSidebar";
 
 
 export default function AdminLayout({ children }) {
