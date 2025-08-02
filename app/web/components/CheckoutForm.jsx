@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { ShoppingCart, User, Mail } from 'lucide-react';
+import { ShoppingCart, User, Mail, Phone, MapPin } from 'lucide-react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSession } from 'next-auth/react';
 import { toast } from 'react-toastify';
@@ -128,46 +128,75 @@ const [formData, setFormData] = useState({
 
           {/* Customer Information Form */}
           <div className="lg:order-1">
-            <div className="bg-white rounded-lg shadow-sm border p-6">
-              <h2 className="text-xl font-semibold mb-6 flex items-center">
-                <User className="mr-2 h-5 w-5" />
-                Customer Information
-              </h2>
-              
-              <div className="space-y-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    Full Name *
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleInputChange}
-                   
-                    required
-                    placeholder="Enter your full name"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-black text-base"
-                  />
-                </div>
-                
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    <Mail className="inline h-4 w-4 mr-1" />
-                    Email Address *
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleInputChange}
-                    required
-                 
-                    placeholder="Enter your email address"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-black text-base"
-                  />
-                </div>
-              </div>
+          <div className="space-y-6">
+  {/* Full Name */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700 mb-2">
+      Full Name *
+    </label>
+    <input
+      type="text"
+      name="name"
+      value={formData.name}
+      onChange={handleInputChange}
+      required
+      placeholder="Enter your full name"
+      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-black text-base"
+    />
+  </div>
+
+  {/* Email Address */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700 mb-2">
+      <Mail className="inline h-4 w-4 mr-1" />
+      Email Address *
+    </label>
+    <input
+      type="email"
+      name="email"
+      value={formData.email}
+      onChange={handleInputChange}
+      required
+      placeholder="Enter your email address"
+      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-black text-base"
+    />
+  </div>
+
+  {/* Phone Number */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700 mb-2">
+      <Phone className="inline h-4 w-4 mr-1" />
+      Phone Number *
+    </label>
+    <input
+      type="tel"
+      name="phone"
+      value={formData.phone}
+      onChange={handleInputChange}
+      required
+      placeholder="Enter your phone number"
+      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-black text-base"
+    />
+  </div>
+
+  {/* Address */}
+  <div>
+    <label className="block text-sm font-medium text-gray-700 mb-2">
+      <MapPin className="inline h-4 w-4 mr-1" />
+      Address *
+    </label>
+    <input
+      type="text"
+      name="address"
+      value={formData.address}
+      onChange={handleInputChange}
+      required
+      placeholder="Enter your address"
+      className="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-black focus:border-black text-base"
+    />
+  </div>
+</div>
+
 
               <button
                 type="button"
@@ -184,6 +213,6 @@ const [formData, setFormData] = useState({
           </div>
         </div>
       </div>
-    </div>
+    
   );
 }
