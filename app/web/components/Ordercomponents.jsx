@@ -14,6 +14,7 @@ import {
 import { useSession } from "next-auth/react";
 import useOrderdata from "@/app/Hooks/useOrderdata";
 import Loadingred from "./loadingred";
+import Payment from "./Payment";
 
 export default function Ordercomponents() {
   const [selectedPayment, setSelectedPayment] = useState("");
@@ -22,17 +23,16 @@ export default function Ordercomponents() {
 
   // ✅ Get the first order safely
   const [firstOrder] = orders || [];
-  const {
-    _id: orderId,
-    customer,
-    items,
-    status,
-    createdAt,
-  } = firstOrder || {};
+  const { _id: orderId, customer, items, status, createdAt } = firstOrder || {};
 
   // ✅ If loading or no order found
-  if (isLoading) return <Loadingred/>
-  if (!firstOrder) return <p className="p-4">No orders found.</p>;
+  if (isLoading)
+    return (
+      <div className="w-full py-16 flex justify-center items-center">
+        <Loadingred></Loadingred>
+      </div>
+    );
+  if (!firstOrder) return <p className="p-4 text-2xl text-center font-bold">No orders found.</p>;
 
   // ✅ Use customer info from DB
   const customerInfo = {
@@ -177,31 +177,53 @@ export default function Ordercomponents() {
               </div>
 
               <div className="space-y-4">
-               {orders?.length > 0 ? (
-  orders.map(order => (
-    <div key={order._id} className="bg-white rounded-lg shadow-sm border p-6 mb-6">
-      <h2 className="text-xl font-bold mb-2">Order #{order._id}</h2>
-      <p className="text-sm text-gray-600 mb-4">Status: {order.status}</p>
-      <p className="text-sm text-gray-600 mb-4">Created At: {new Date(order.createdAt).toLocaleString()}</p>
+                {orders?.length > 0 ? (
+                  orders.map((order) => (
+                    <div
+                      key={order._id}
+                      className="bg-white rounded-lg shadow-sm border p-6 mb-6"
+                    >
+                      <h2 className="text-xl font-bold mb-2">
+                        Order #{order._id}
+                      </h2>
+                      <p
+                        className={`text-sm mb-4 ${
+                          order.status === "confirmed"
+                            ? "text-green-600"
+                            : "text-yellow-600"
+                        }`}
+                      >
+                        Status: {order.status}
+                      </p>
 
-      <div className="space-y-4">
-        {order.items.map(item => (
-          <div key={item.id} className="flex items-center space-x-4 border p-4 rounded-md">
-            <img src={item.image} alt={item.name} className="w-20 h-20 object-cover rounded-md"/>
-            <div>
-              <h3 className="font-medium">{item.name}</h3>
-              <p>Quantity: {item.quantity}</p>
-              <p>Price: ৳{item.price}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  ))
-) : (
-  <p>No orders found.</p>
-)}
+                      <p className="text-sm text-gray-600 mb-4">
+                        Created At: {new Date(order.createdAt).toLocaleString()}
+                      </p>
 
+                      <div className="space-y-4">
+                        {order.items.map((item) => (
+                          <div
+                            key={item.id}
+                            className="flex items-center space-x-4 border p-4 rounded-md"
+                          >
+                            <img
+                              src={item.image}
+                              alt={item.name}
+                              className="w-20 h-20 object-cover rounded-md"
+                            />
+                            <div>
+                              <h3 className="font-medium">{item.name}</h3>
+                              <p>Quantity: {item.quantity}</p>
+                              <p>Price: ৳{item.price}</p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <p>No orders found.</p>
+                )}
               </div>
             </div>
 
@@ -342,61 +364,17 @@ export default function Ordercomponents() {
           </div>
 
           {/* Payment Summary */}
-          <div className="lg:col-span-1">
-            <div className="bg-white rounded-lg shadow-sm border p-6 sticky top-4">
-              <p className="text-red-500">
-                Note:{" "}
-                <span className="text-black underline">
-                  payment is optional, you can pay cash on delivery
-                </span>
-              </p>
-              <h2 className="text-xl mt-1 font-semibold mb-5">
-                Payment Summary
-              </h2>
+        
+        <Payment 
+  selectedMethod={selectedMethod} 
+  subtotal={subtotal} 
+  deliveryFee={deliveryFee} 
+  total={total} 
+  processingFee={processingFee}
+  handlePayment={handlePayment}    // ✅ you MUST pass this!
+  selectedPayment={selectedPayment} // ✅ you MUST pass this!
+/>
 
-              <div className="space-y-3 mb-6">
-                <div className="flex justify-between text-sm">
-                  <span>Subtotal</span>
-                  <span>৳{subtotal.toFixed(2)}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span>Delivery Fee</span>
-                  <span>৳{deliveryFee.toFixed(2)}</span>
-                </div>
-                {selectedMethod && (
-                  <div className="flex justify-between text-sm">
-                    <span>Processing Fee ({selectedMethod.name})</span>
-                    <span>৳{processingFee.toFixed(2)}</span>
-                  </div>
-                )}
-                <div className="border-t pt-3">
-                  <div className="flex justify-between text-lg font-semibold">
-                    <span>Total</span>
-                    <span>৳{total.toFixed(2)}</span>
-                  </div>
-                </div>
-              </div>
-
-              <button
-                onClick={handlePayment}
-                disabled={!selectedPayment}
-                className={`w-full py-4 px-6 rounded-md font-semibold text-lg transition-colors ${
-                  selectedPayment
-                    ? "bg-black text-white hover:bg-gray-800"
-                    : "bg-gray-300 text-gray-500 cursor-not-allowed"
-                }`}
-              >
-                {selectedPayment
-                  ? `Pay with ${selectedMethod?.name}`
-                  : "Select Payment Method"}
-              </button>
-
-              <div className="mt-4 flex items-center justify-center text-sm text-gray-500">
-                <CheckCircle className="mr-2 h-4 w-4" />
-                Secure Payment Protected
-              </div>
-            </div>
-          </div>
         </div>
       </div>
     </div>

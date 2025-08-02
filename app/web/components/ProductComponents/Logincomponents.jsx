@@ -1,6 +1,6 @@
 "use client"
 import { useState } from "react"; // ✅ make sure this is imported
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter} from "next/navigation";
 import { signIn } from "next-auth/react"; // ✅ make sure this is imported too
 import { Eye, EyeOff, Lock } from "lucide-react";
 import Link from "next/link";
@@ -16,8 +16,6 @@ export default function Logincomponents() {
   const [rememberMe, setRememberMe] = useState(false);
 
   const router = useRouter();
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
 
   const handleInputChange = (e) => {
     setFormData({
@@ -36,12 +34,12 @@ export default function Logincomponents() {
       redirect: false,
       email,
       password,
-      callbackUrl,
+
     });
 
     if (res?.ok) {
       toast.success("user login successfully")
-      router.push(callbackUrl);
+      router.push("/");
     } else {
       setError(res?.error || "Invalid email or password");
     }

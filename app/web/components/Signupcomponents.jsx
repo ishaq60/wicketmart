@@ -4,7 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { Eye, EyeOff, Lock, User, Upload } from "lucide-react";
 import { toast } from "react-toastify";
-import { useSearchParams, useRouter } from "next/navigation";
+import {  useRouter } from "next/navigation";
 
 export default function Signupcomponent() {
   const [showPassword, setShowPassword] = useState(false);
@@ -12,8 +12,8 @@ export default function Signupcomponent() {
   const [acceptTerms, setAcceptTerms] = useState(false);
   const [acceptTermsOfUse, setAcceptTermsOfUse] = useState(false);
 
-  const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl") || "/";
+
+
   const router = useRouter();
 
   const [formData, setFormData] = useState({
@@ -49,7 +49,7 @@ export default function Signupcomponent() {
       }
 
       toast.success("User created successfully");
-      router.push(callbackUrl); // ✅ go to original route
+      router.push("/"); // ✅ go to original route
     } catch (error) {
       console.error("Error during signup:", error);
       toast.error("Network error. Please try again.");
