@@ -1,11 +1,15 @@
-import React from 'react';
+// app/admin/layout.js
 
-const layout = () => {
-    return (
-        <div>
-           this is Dasboard
-        </div>
-    );
-};
+import AdminSidebar from "../components/AdminrelatedComonents/AdminSidebar";
 
-export default layout;
+
+export default function AdminLayout({ children }) {
+  return (
+    <div className="flex h-screen bg-gray-100">
+      <AdminSidebar />
+      <main className="flex-1 mt-12 ml-12 container mx-auto  overflow-auto p-6 lg:ml-0">
+        {children}
+      </main>
+    </div>
+  );
+}

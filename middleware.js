@@ -8,7 +8,7 @@ export async function middleware(request) {
   const token = await getToken({ req: request, secret });
   const { pathname } = request.nextUrl;
 
-  const protectedRoutes = ["/checkout","/orders", "/dashboard/admin"];
+  const protectedRoutes = ["/checkout","/orders","/profile", "/dashboard/admin"];
 
   // 🔒 If no token and accessing a protected route
   if (!token && protectedRoutes.some((route) => pathname.startsWith(route))) {
@@ -30,6 +30,8 @@ export async function middleware(request) {
 export const config = {
   matcher: [
     "/checkout",
-    "/dashboard/admin/:path*",
+    "/orders",
+    "/profile",
+    // "/dashboard/admin/:path*",
   ],
 };
