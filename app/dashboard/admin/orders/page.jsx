@@ -1,9 +1,10 @@
+import OrderManagement from '@/app/web/components/AdminrelatedComonents/Orders';
 import React from 'react';
 
 const page = () => {
     return (
         <div>
-            orders
+            <OrderManagement></OrderManagement>
         </div>
     );
 };

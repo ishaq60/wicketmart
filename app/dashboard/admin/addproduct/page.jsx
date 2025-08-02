@@ -1,9 +1,11 @@
+import AddProductComponents from '@/app/web/components/AdminrelatedComonents/AddProductComponents';
 import React from 'react';
 
 const page = () => {
     return (
         <div>
-           add product 
+
+           <AddProductComponents></AddProductComponents>
         </div>
     );
 };
