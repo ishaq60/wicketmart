@@ -47,12 +47,3 @@ export const PATCH = async (request) => {
  * Expects JSON body: { id: "orderId" }
  * Deletes an order by ID.
  */
-export const DELETE = async (request) => {
-  try {
-    const db = await connectDB();
-    const orderCollection = db.collection("orders");
-
-    const { id } = await request.json();
-
-    if (!id || !ObjectId.isValid(id)) {
-      return NextResponse.json({ error: "Invalid o

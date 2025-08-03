@@ -1,9 +1,10 @@
+import Profilecomponent from '@/app/web/components/AdminrelatedComonents/profilecomponent';
 import React from 'react';
 
 const page = () => {
     return (
         <div>
-            this is profile page
+            <Profilecomponent></Profilecomponent>
         </div>
     );
 };
