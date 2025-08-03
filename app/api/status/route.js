@@ -1,16 +1,21 @@
-import connectDB from "@/app/server/libs/connectDB";
-import { ObjectId } from "mongodb";
-import { NextResponse } from "next/server";
 
-export const PATCH = async (request, { params }) => {
+import { NextResponse } from "next/server";
+import { ObjectId } from "mongodb";
+import connectDB from "@/app/server/libs/connectDB";
+
+/**
+ * PATCH /api/status
+ * Expects JSON body: { id: "orderId", status: "newStatus" }
+ * Updates the status of an order by ID.
+ */
+export const PATCH = async (request) => {
   try {
     const db = await connectDB();
     const orderCollection = db.collection("orders");
 
-    const { id } = params;
-    const { status } = await request.json();
+    const { id, status } = await request.json();
 
-    if (!ObjectId.isValid(id)) {
+    if (!id || !ObjectId.isValid(id)) {
       return NextResponse.json({ error: "Invalid order ID" }, { status: 400 });
     }
 
@@ -36,3 +41,18 @@ export const PATCH = async (request, { params }) => {
     return NextResponse.json({ error: "Failed to update status" }, { status: 500 });
   }
 };
+
+/**
+ * DELETE /api/status
+ * Expects JSON body: { id: "orderId" }
+ * Deletes an order by ID.
+ */
+export const DELETE = async (request) => {
+  try {
+    const db = await connectDB();
+    const orderCollection = db.collection("orders");
+
+    const { id } = await request.json();
+
+    if (!id || !ObjectId.isValid(id)) {
+      return NextResponse.json({ error: "Invalid o
