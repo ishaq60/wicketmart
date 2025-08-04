@@ -86,12 +86,12 @@ setExactRating,
 
      <div className="mt-2 flex justify-center items-center gap-x-4">
   <Select onValueChange={(value) => setMinPrice(Number(value))}>
-    <SelectTrigger className="w-[120px]">
+    <SelectTrigger className="w-[200px]">
       <SelectValue placeholder="Min Price" />
     </SelectTrigger>
     <SelectContent className="z-[1000]">
       <SelectGroup>
-        <SelectLabel>Prices</SelectLabel>
+        <SelectLabel className="p-2">Prices</SelectLabel>
         <div className="bg-gray-600 text-white">
           <SelectItem value="100">100</SelectItem>
           <SelectItem value="5000">5000</SelectItem>

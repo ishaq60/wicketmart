@@ -10,6 +10,7 @@ import { ToastContainer } from 'react-toastify';
 import { SessionProvider,session } from 'next-auth/react';
 import { usePathname } from 'next/navigation';
 import Topheader from './web/components/Topheader';
+import AOSWrapper from './AOSWrapper';
 
 export default function AppProvider({ children }) {
   const [queryClient] = useState(() => new QueryClient());
@@ -26,6 +27,7 @@ export default function AppProvider({ children }) {
 
       {!hideLayout &&   <Topheader />}
       {!hideLayout && <Navbar />}
+      <AOSWrapper/>
         {children}
            <ToastContainer  position="top-center" autoClose={3000} />
       </QueryClientProvider>

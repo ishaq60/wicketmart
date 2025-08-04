@@ -17,8 +17,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+
 export const metadata = {
-  title: "WicketMart",
+  title: {
+    default: "Wicket Mart",
+    template: "%s | Wicket Mart", // ✅ Correct placeholder
+  },
   description: "Your ultimate cricket store",
 };
 

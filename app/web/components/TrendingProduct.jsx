@@ -49,7 +49,7 @@ export default function TrendingProduct() {
   }
 
   return (
-    <div className="container mx-auto px-4">
+    <div  className="container mx-auto px-4">
       <h1 className="text-4xl mt-20 font-bold text-center">Trending Products</h1>
 
       <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-8 mt-20 justify-center items-stretch">
@@ -66,7 +66,7 @@ export default function TrendingProduct() {
           };
 
           return (
-            <div
+            <div  data-aos="fade-up"
               key={product._id}
               className="w-full max-w-[300px] h-[520px] bg-white border border-gray-200 rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 flex flex-col justify-between"
             >
@@ -75,7 +75,7 @@ export default function TrendingProduct() {
                 className="flex-grow flex flex-col justify-between"
               >
                 {/* Image */}
-                <div className="bg-gray-50 flex justify-center items-center py-6">
+                <div  className="bg-gray-50 flex justify-center items-center py-6">
                   <Image
                     src={product?.images?.[0] || "/placeholder.jpg"}
                     width={150}

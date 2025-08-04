@@ -1,0 +1,14 @@
+<svg width="300" height="100" viewBox="0 0 300 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="100" fill="#0D1117"/>
+  <text x="20" y="60" font-family="Arial, Helvetica, sans-serif" font-size="50" fill="#00FFB3" font-weight="bold">
+    Cricket
+  </text>
+  <text x="180" y="60" font-family="Arial, Helvetica, sans-serif" font-size="40" fill="#FFFFFF" font-weight="bold">
+    Mart
+  </text>
+  <circle cx="150" cy="40" r="6" fill="#FF4136"/>
+  <rect x="148" y="20" width="4" height="18" fill="#FFFFFF" transform="rotate(35 148 20)" />
+  <text x="20" y="90" font-family="Arial, Helvetica, sans-serif" font-size="20" fill="#FFF">
+    Your one-stop cricket shop!
+  </text>
+</svg>

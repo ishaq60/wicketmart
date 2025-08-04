@@ -33,7 +33,7 @@ const FeaturedProducts = () => {
         spaceBetween={10}
         slidesPerView={1}
         centeredSlides={true}
-        autoplay={{ delay: 3000, disableOnInteraction: false }}
+        autoplay={{ delay: 1000, disableOnInteraction: false }}
         pagination={{ clickable: true }}
         loop={true}
         modules={[Autoplay, Pagination]}

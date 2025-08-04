@@ -91,13 +91,14 @@ const ProductDetails = ({ product }) => {
                     : "border-gray-200"
                 }`}
               >
-                <Image
-                  src={img}
-                  alt={`Product view ${index + 1}`}
-                  width={200}
-                  height={204}
-                  className="w-full h-full object-cover"
-                />
+           <Image
+  src={img || "/fallback.png"} // Replace with your fallback image
+  alt={`Product view ${index + 1}`}
+  width={200}
+  height={200}
+  className="object-contain"
+/>
+
               </button>
             ))}
           </div>

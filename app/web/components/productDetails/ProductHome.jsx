@@ -6,7 +6,10 @@ import { useParams } from 'next/navigation';
 import Useproduct from '@/app/Hooks/Useproduct';
 
 import Loadingred from '../loadingred';
-
+export const metadata={
+    title:"postdetails",
+    description:"tThis is post details page"
+}
 
 const ProductHome = () => {
   const { id } = useParams();
