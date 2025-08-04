@@ -74,7 +74,7 @@ console.log(users)
         <div className="hidden md:block lg:hidden">
           <div className="grid gap-4">
             {users.map((user) => (
-              <div key={user.id} className=" rounded-lg p-4">
+              <div key={user._id} className=" rounded-lg p-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <p className=" text-sm">Name</p>
@@ -124,7 +124,7 @@ console.log(users)
         <div className="block md:hidden">
           <div className="space-y-4">
             {users.map((user) => (
-              <div key={user.id} className=" rounded-lg p-4">
+              <div key={user._id} className=" rounded-lg p-4">
                 <div className="flex justify-between items-start mb-3">
                   <div>
                     <h3 className="text-black font-medium text-lg">{user.name}</h3>

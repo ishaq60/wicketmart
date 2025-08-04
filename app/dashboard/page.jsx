@@ -1,8 +1,10 @@
+import AdminOverviewcompoents from "../web/components/AdminrelatedComonents/AdminOverviewcompoents";
+import AdminOverview from "../web/components/AdminrelatedComonents/AdminOverviewcompoents";
+
 export default function DashboardPage() {
   return (
     <div>
-      <h1 className="text-2xl font-bold">Dashboard Overview</h1>
-      <p>Welcome to your dashboard overview page!</p>
+<AdminOverviewcompoents></AdminOverviewcompoents>
     </div>
   );
 }

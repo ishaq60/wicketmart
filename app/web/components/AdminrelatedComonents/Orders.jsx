@@ -6,12 +6,15 @@ import React, { useState, useEffect } from 'react';
 import Swal from 'sweetalert2';
 
 const OrderManagement = () => {
-  const { orders: fetchedOrders } = useAllorders();
-  const [orders, setOrders] = useState([]);
+const { orders: fetchedOrders } = useAllorders(); // ✅ Destructure correctly
+const [orders, setOrders] = useState([]);
 
-  useEffect(() => {
+useEffect(() => {
+  if (Array.isArray(fetchedOrders)) {
     setOrders(fetchedOrders);
-  }, [fetchedOrders]);
+  }
+}, [fetchedOrders]);
+
 
   const handleDelete = (id) => {
     setOrders(orders.filter(order => order._id !== id));
