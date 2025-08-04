@@ -16,7 +16,7 @@ import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut, useSession } from "next-auth/react";
 import { toast } from "react-toastify";
-import svg from "../../../public/image/payment-svg/navbar.svg";
+
 import Image from "next/image";
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -59,7 +59,9 @@ const Navbar = () => {
               {/* Logo */}
               <a href="/" className="flex items-center">
                 <div className="sm:w-20 lg:w-50 h-10  rounded-md flex items-center justify-center mr-2">
-                  <Image src={svg} width={150} alt="navbar"></Image>
+                <Image src="/image/payment-svg/navbar.svg" width={150} height={50} alt="navbar" />
+
+
                 </div>
               </a>
             </div>
