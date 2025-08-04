@@ -47,7 +47,7 @@ const HeroComponent = () => {
         navigation={true}
         modules={[Navigation, Autoplay]}
         autoplay={{
-          delay: 10000, // 5 seconds
+          delay: 3000, // 5 seconds
           disableOnInteraction: false,
         }}
         className="mySwiper h-[400px] sm:h-[500px] md:h-[600px] lg:h-[600px] xl:h-[600px] 2xl:h-[800px]"

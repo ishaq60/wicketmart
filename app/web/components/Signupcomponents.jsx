@@ -30,31 +30,41 @@ export default function Signupcomponent() {
     });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const baseUrl = "http://localhost:3000";
+ const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    try {
-      const resp = await fetch(`${baseUrl}/api/signup`, {
-        method: "POST",
-        body: JSON.stringify(formData),
-        headers: { "Content-Type": "application/json" },
-      });
+  if (formData.password !== formData.confirmPassword) {
+    toast.error("Passwords do not match");
+    return;
+  }
 
-      const result = await resp.json();
+  if (!acceptTerms || !acceptTermsOfUse) {
+    toast.error("Please accept the terms and conditions.");
+    return;
+  }
 
-      if (!resp.ok) {
-        toast.error(result.error || "Signup failed");
-        return;
-      }
+  try {
+    const resp = await fetch(`/api/signup`, {
+      method: "POST",
+      body: JSON.stringify(formData),
+      headers: { "Content-Type": "application/json" },
+    });
 
-      toast.success("User created successfully");
-      router.push("/"); // ✅ go to original route
-    } catch (error) {
-      console.error("Error during signup:", error);
-      toast.error("Network error. Please try again.");
+    const result = await resp.json();
+
+    if (!resp.ok) {
+      toast.error(result.error || "Signup failed");
+      return;
     }
-  };
+
+    toast.success("User created successfully");
+    router.push("/");
+  } catch (error) {
+    console.error("Error during signup:", error);
+    toast.error("Network error. Please try again.");
+  }
+};
+
 
   return (
     <div className="min-h-screen bg-gray-50 flex  justify-center py-10 px-4 sm:px-6 lg:px-8">
@@ -63,7 +73,7 @@ export default function Signupcomponent() {
           <div className="mx-auto h-16 w-16 bg-black rounded-full flex items-center justify-center mb-6">
             <Lock className="h-8 w-8 text-white" />
           </div>
-          <h2 className="text-2xl font-semibold text-gray-700">
+          <h2 className="text-2xl font-semibold text-black">
             Sign Up for an Account !
           </h2>
         </div>
@@ -109,9 +119,9 @@ export default function Signupcomponent() {
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? (
-                <EyeOff className="h-5 w-5 text-gray-400" />
+                <EyeOff className="h-5 w-5 z-50  text-black" />
               ) : (
-                <Eye className="h-5 w-5 text-gray-400" />
+                <Eye className="h-5 w-5 z-50 text-black" />
               )}
             </button>
           </div>
@@ -132,9 +142,9 @@ export default function Signupcomponent() {
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
             >
               {showConfirmPassword ? (
-                <EyeOff className="h-5 w-5 text-gray-400" />
+                <EyeOff className="h-5 w-5 z-50 text-black" />
               ) : (
-                <Eye className="h-5 w-5 text-gray-400" />
+                <Eye className="h-5 w-5 z-50 text-black" />
               )}
             </button>
           </div>
@@ -162,7 +172,7 @@ export default function Signupcomponent() {
                 onChange={(e) => setAcceptTerms(e.target.checked)}
                 className="h-4 w-4 mt-0.5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
-              <label htmlFor="accept-terms" className="ml-2 text-sm text-gray-700">
+              <label htmlFor="accept-terms" className="ml-2 text-sm text-black">
                 I Accept The Cricket Weapon Terms & Conditions
               </label>
             </div>
@@ -176,13 +186,13 @@ export default function Signupcomponent() {
                 onChange={(e) => setAcceptTermsOfUse(e.target.checked)}
                 className="h-4 w-4 mt-0.5 text-blue-600 border-gray-300 rounded focus:ring-blue-500"
               />
-              <label htmlFor="accept-terms-of-use" className="ml-2 text-sm text-gray-700">
+              <label htmlFor="accept-terms-of-use" className="ml-2 text-sm text-black">
                 I Accept The Cricket Weapon Terms Of Use
               </label>
             </div>
           </div>
 
-          <div className="text-center text-sm text-gray-500 mt-4">
+          <div className="text-center text-sm text-black mt-4">
             I acknowledge Cricket Weapon will use my information in accordance with its{' '}
             <a href="#" className="text-blue-600 hover:text-blue-500">
               Privacy Policy.
@@ -199,7 +209,7 @@ export default function Signupcomponent() {
           </div>
 
           <div className="text-center">
-            <span className="text-sm text-gray-700">
+            <span className="text-sm text-black">
               Already have an account?{' '}
               <Link href="/login" className="font-medium text-blue-600 hover:text-blue-500">
                 Login

@@ -87,9 +87,9 @@ export default function Logincomponents() {
                 onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
-                  <EyeOff className="h-5 w-5 text-black" />
+                  <EyeOff className="h-5 w-5 z-50 text-black" />
                 ) : (
-                  <Eye className="h-5 w-5 text-black" />
+                  <Eye className="h-5 w-5 z-50 text-black" />
                 )}
               </button>
             </div>

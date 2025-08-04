@@ -1,7 +1,8 @@
 "use client"
-import { Image } from 'lucide-react';
+;
 import React from 'react';
 import image from "../../../public/Image/about/tc.jpg"
+import Image from 'next/image';
 export default function WicketMartAbout() {
   return (
     <div className="max-w-7xl mx-auto p-8 bg-white">

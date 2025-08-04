@@ -16,7 +16,7 @@ console.log(users)
         {/* Header */}
         <div className="mb-6">
           <h1 className="text-2xl sm:text-3xl font-bold text-black mb-4">Manage Users</h1>
-          <button className="bg-white text-black px-4 py-2 rounded hover:bg-gray-200 text-sm sm:text-base">
+          <button className="bg-white text-black px-4 py-2 rounded hover:bg-red-200 text-sm sm:text-base">
             Add User
           </button>
         </div>
@@ -50,10 +50,10 @@ console.log(users)
                   <td className="text-black px-6 py-4">{user.role}</td>
                   <td className="text-black px-6 py-4">
                     <div className="flex space-x-2">
-                      <button className="bg-white text-black px-3 py-1 rounded text-sm hover:bg-gray-200">
+                      <button className="bg-white text-black px-3 py-1 rounded text-sm hover:bg-red-200">
                         View
                       </button>
-                      <button className="bg-white text-black px-3 py-1 rounded text-sm hover:bg-gray-200">
+                      <button className="bg-white text-black px-3 py-1 rounded text-sm hover:bg-red-200">
                         Edit
                       </button>
                       <button 
@@ -74,44 +74,38 @@ console.log(users)
         <div className="hidden md:block lg:hidden">
           <div className="grid gap-4">
             {users.map((user) => (
-              <div key={user.id} className="bg-gray-900 rounded-lg p-4">
+              <div key={user.id} className=" rounded-lg p-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <p className="text-gray-400 text-sm">Name</p>
+                    <p className=" text-sm">Name</p>
                     <p className="text-black font-medium">{user.name}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">ID</p>
+                    <p className=" text-sm">ID</p>
                     <p className="text-black">#{user.id}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">Email</p>
+                    <p className=" text-sm">Email</p>
                     <p className="text-black text-sm">{user.email}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">Phone</p>
+                    <p className=" text-sm">Phone</p>
                     <p className="text-black text-sm">{user.phone}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">Status</p>
-                    <span className={`px-2 py-1 rounded text-sm ${
-                      user.status === 'Active' ? 'bg-green-700 text-green-200' :
-                      user.status === 'Inactive' ? 'bg-gray-700 text-gray-200' :
-                      'bg-red-700 text-red-200'
-                    }`}>
-                      {user.status}
-                    </span>
+                    <p className=" text-sm">Status</p>
+                    {user.status}
                   </div>
                   <div>
-                    <p className="text-gray-400 text-sm">Role</p>
-                    <p className="text-black">{user.role}</p>
+                    <p className="text-sm">Role</p>
+                    <p className="text-black">{user.status}</p>
                   </div>
                 </div>
                 <div className="flex space-x-2 mt-4 pt-4 border-t border-gray-700">
-                  <button className="bg-white text-black px-3 py-1 rounded text-sm hover:bg-gray-200">
+                  <button className="bg-white text-black px-3 py-1 rounded text-sm hover:bg-red-200">
                     View
                   </button>
-                  <button className="bg-white text-black px-3 py-1 rounded text-sm hover:bg-gray-200">
+                  <button className="bg-white text-black px-3 py-1 rounded text-sm hover:bg-red-200">
                     Edit
                   </button>
                   <button 
@@ -130,41 +124,41 @@ console.log(users)
         <div className="block md:hidden">
           <div className="space-y-4">
             {users.map((user) => (
-              <div key={user.id} className="bg-gray-900 rounded-lg p-4">
+              <div key={user.id} className=" rounded-lg p-4">
                 <div className="flex justify-between items-start mb-3">
                   <div>
                     <h3 className="text-black font-medium text-lg">{user.name}</h3>
-                    <p className="text-gray-400 text-sm">ID: #{user.id}</p>
+                    <p className="text-black text-sm">ID: #{user.id}</p>
                   </div>
                   <span className={`px-2 py-1 rounded text-xs ${
                     user.status === 'Active' ? 'bg-green-700 text-green-200' :
                     user.status === 'Inactive' ? 'bg-gray-700 text-gray-200' :
-                    'bg-red-700 text-red-200'
+                    'bg-red-700 text-black'
                   }`}>
-                    {user.status}
+                    {user?.status}
                   </span>
                 </div>
                 
                 <div className="space-y-2 mb-4">
                   <div>
-                    <p className="text-gray-400 text-xs">Email</p>
+                    <p className="text-black text-xs">Email</p>
                     <p className="text-black text-sm">{user.email}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-xs">Phone</p>
+                    <p className="text-black text-xs">Phone</p>
                     <p className="text-black text-sm">{user.phone}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400 text-xs">Role</p>
+                    <p className="text-black text-xs">Role</p>
                     <p className="text-black text-sm">{user.role}</p>
                   </div>
                 </div>
 
                 <div className="flex space-x-2">
-                  <button className="flex-1 bg-white text-black py-2 rounded text-sm hover:bg-gray-200">
+                  <button className="flex-1 bg-white text-black py-2 rounded text-sm hover:bg-red-200">
                     View
                   </button>
-                  <button className="flex-1 bg-white text-black py-2 rounded text-sm hover:bg-gray-200">
+                  <button className="flex-1 bg-white text-black py-2 rounded text-sm hover:bg-red-200">
                     Edit
                   </button>
                   <button 

@@ -1,6 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { Search, ShoppingCart, User, Menu, X, LayoutDashboard } from "lucide-react";
+import {
+  Search,
+  ShoppingCart,
+  User,
+  Menu,
+  X,
+  LayoutDashboard,
+} from "lucide-react";
 import { IoMdArrowDropdown } from "react-icons/io";
 import { FaUserAlt } from "react-icons/fa";
 import { IoCart } from "react-icons/io5";
@@ -8,13 +15,14 @@ import { ImSearch } from "react-icons/im";
 import Link from "next/link";
 import { useDispatch, useSelector } from "react-redux";
 import { signOut, useSession } from "next-auth/react";
+import { toast } from "react-toastify";
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const { data: session, status } = useSession();
-  console.log(status);
+  console.log(session?.user?.type);
 
   const navLinks = [
     { id: "home", name: "Home", href: "/" },
@@ -156,13 +164,15 @@ const Navbar = () => {
                         <ShoppingCart size={36} className="mr-3" />
                         cart
                       </a>
-                      <a
-                        href="/dashboard"
-                        className="flex items-center px-4  text-xl py-2 hover:bg-[#ed1c24] transition-colors"
-                      >
-                        <LayoutDashboard size={36} className="mr-3" />
-                       Dashboard
-                      </a>
+                      {session?.user?.type === "admin" && (
+                        <a
+                          href="/dashboard"
+                          className="flex items-center px-4  text-xl py-2 hover:bg-[#ed1c24] transition-colors"
+                        >
+                          <LayoutDashboard size={36} className="mr-3" />
+                          Dashboard
+                        </a>
+                      )}
 
                       {status !== "authenticated" ? (
                         <a
@@ -174,7 +184,12 @@ const Navbar = () => {
                         </a>
                       ) : (
                         <button
-                          onClick={() => signOut()}
+                          onClick={() => {
+                            // ✅ Show toast first
+                            toast.success("Logged out successfully");
+                            // ✅ Then sign out with redirect
+                            signOut({ callbackUrl: "/" });
+                          }}
                           className="flex items-center w-full px-4 py-3 text-xl hover:bg-[#ed1c24] transition-colors"
                         >
                           <div className="w-4 h-4 mr-3">🔒</div>
@@ -249,6 +264,15 @@ const Navbar = () => {
                 <div className="w-5 h-5 mr-4">ℹ️</div>
                 About Us
               </a>
+              {session?.user?.type === "admin" && (
+                <a
+                  href="/dashboard"
+                  className="flex items-center px-4  text-xl py-2 hover:bg-[#ed1c24] transition-colors"
+                >
+                  <LayoutDashboard size={36} className="mr-3" />
+                  Dashboard
+                </a>
+              )}
               <a
                 href="/account"
                 className="flex items-center px-6 py-4 hover:bg-[#ed1c24] transition-colors"
@@ -256,23 +280,28 @@ const Navbar = () => {
                 <User size={20} className="mr-4" />
                 Account
               </a>
-               {status !== "authenticated" ? (
-                        <a
-                          href="/login"
-                          className="flex items-center px-4 py-3 text-xl hover:bg-[#ed1c24] transition-colors"
-                        >
-                          <div className="w-4 h-4 mr-3">🔓</div>
-                          Login
-                        </a>
-                      ) : (
-                        <button
-                          onClick={() => signOut()}
-                          className="flex items-center w-full px-4 py-3 text-xl hover:bg-[#ed1c24] transition-colors"
-                        >
-                          <div className="w-4 h-4 mr-3">🔒</div>
-                          Logout
-                        </button>
-                      )}
+              {status !== "authenticated" ? (
+                <a
+                  href="/login"
+                  className="flex items-center px-4 py-3 text-xl hover:bg-[#ed1c24] transition-colors"
+                >
+                  <div className="w-4 h-4 mr-3">🔓</div>
+                  Login
+                </a>
+              ) : (
+                <button
+                  onClick={() => {
+                    // ✅ Show toast first
+                    toast.success("Logged out successfully");
+                    // ✅ Then sign out with redirect
+                    signOut({ callbackUrl: "/" });
+                  }}
+                  className="flex items-center w-full px-4 py-3 text-xl hover:bg-[#ed1c24] transition-colors"
+                >
+                  <div className="w-4 h-4 mr-3">🔒</div>
+                  Logout
+                </button>
+              )}
             </div>
           </div>
         </>

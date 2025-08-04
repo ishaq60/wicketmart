@@ -18,7 +18,7 @@ export async function middleware(request) {
   }
 
   // 🔐 Restrict /dashboard/admin to admin users
-  if (pathname.startsWith("/dashboard/admin") && token?.type !== "admin") {
+  if (pathname.startsWith("/dashboard") && token?.type !== "admin") {
     return NextResponse.redirect(new URL("/unauthorized", request.url));
   }
 
@@ -32,6 +32,6 @@ export const config = {
     "/checkout",
     "/orders",
     "/profile",
-    // "/dashboard/admin/:path*",
+    "/dashboard",
   ],
 };
