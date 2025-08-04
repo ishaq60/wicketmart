@@ -58,36 +58,39 @@ const Navbar = () => {
               </div>
 
               {/* Logo */}
-              <a href="/" className="flex items-center">
-                <div className="sm:w-20 lg:w-50 h-10  rounded-md flex items-center justify-center mr-2">
-<svg width="300" height="100" viewBox="0 0 300 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-  <rect width="300" height="100" fill="#0D1117" />
-  <text
-    x="20"
-    y="60"
-    fontFamily="Arial, Helvetica, sans-serif"
-    fontSize="50"
-    fill="#00FFB3"
-    fontWeight="bold"
-  >
-    Cricket
-  </text>
-  <text
-    x="180"
-    y="60"
-    fontFamily="Arial, Helvetica, sans-serif"
-    fontSize="40"
-    fill="#FFFFFF"
-    fontWeight="bold"
-  >
-    Mart
-  </text>
-</svg>
+             <a href="/" className="flex items-center">
+  <div className="w-full h-full rounded-md flex items-center justify-center mr-2">
+    <svg
+      viewBox="0 0 300 100"
+      xmlns="http://www.w3.org/2000/svg"
+      className="w-1/2 h-1/2"
+      preserveAspectRatio="xMidYMid meet"
+    >
+      <rect width="300" height="100" fill="#0D1117" />
+      <text
+        x="20"
+        y="60"
+        fontFamily="Arial, Helvetica, sans-serif"
+        fontSize="40"
+        fill="#00FFB3"
+        fontWeight="bold"
+      >
+        Cricket
+      </text>
+      <text
+        x="180"
+        y="60"
+        fontFamily="Arial, Helvetica, sans-serif"
+        fontSize="30"
+        fill="#FFFFFF"
+        fontWeight="bold"
+      >
+        Mart
+      </text>
+    </svg>
+  </div>
+</a>
 
-
-
-                </div>
-              </a>
             </div>
 
             {/* Center - Desktop Navigation */}

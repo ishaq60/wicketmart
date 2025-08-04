@@ -22,8 +22,8 @@ const Topheader = () => {
 
         {/* Right */}
         <div className="flex items-center space-x-6">
-          <div className="flex items-center text-sm font-medium space-x-1 cursor-pointer hover:text-gray-300">
-            <span role="img" aria-label="flag">
+          <div className="flex items-center text-sm font-medium space-x-1 cursor-pointer hover:text-black">
+            <span>
               🇮🇳
             </span>
             <span>BD</span>
