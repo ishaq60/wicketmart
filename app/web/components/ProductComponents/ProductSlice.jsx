@@ -35,14 +35,14 @@ setExactRating,
     "Ball",
     "Bag",
     "Helmet",
-    "Cricket Kits",
-    "Batting Gloves",
-    "Batting Pads",
+     "Stump",
+    "Cricket Kit",
+    "Batting Glove",
+    "Batting Pad",
 
-    "Stumps",
     "Shoe",
     "Clothing",
-    "Accessories",
+    "Accessorie",
   ];
 
   const StarRating = ({ rating = 2 }) => {
