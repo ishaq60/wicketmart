@@ -58,7 +58,7 @@ export default function Signupcomponent() {
     }
 
     toast.success("User created successfully");
-    router.push("/");
+    router.push("/login");
   } catch (error) {
     console.error("Error during signup:", error);
     toast.error("Network error. Please try again.");

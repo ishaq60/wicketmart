@@ -16,7 +16,7 @@ console.log(minRating)
     return (
         <div>
           <div className="min-h-screen">
-      <p className="text-xl font-semibold m-4">This is product page</p>
+    
 
       <div className="flex sm:gap-y-36 flex-col lg:flex-row gap-4 w-full p-4">
         {/* Sidebar (25% width on large screens) */}

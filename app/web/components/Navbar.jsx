@@ -17,13 +17,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { signOut, useSession } from "next-auth/react";
 import { toast } from "react-toastify";
 
-import Image from "next/image";
+
 const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const { data: session, status } = useSession();
+  console.log(session)
   console.log(session?.user?.type);
 
   const navLinks = [
@@ -59,7 +60,30 @@ const Navbar = () => {
               {/* Logo */}
               <a href="/" className="flex items-center">
                 <div className="sm:w-20 lg:w-50 h-10  rounded-md flex items-center justify-center mr-2">
-                <Image src="/image/payment-svg/navbar.svg" width={150} height={50} alt="navbar" />
+<svg width="300" height="100" viewBox="0 0 300 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="300" height="100" fill="#0D1117" />
+  <text
+    x="20"
+    y="60"
+    fontFamily="Arial, Helvetica, sans-serif"
+    fontSize="50"
+    fill="#00FFB3"
+    fontWeight="bold"
+  >
+    Cricket
+  </text>
+  <text
+    x="180"
+    y="60"
+    fontFamily="Arial, Helvetica, sans-serif"
+    fontSize="40"
+    fill="#FFFFFF"
+    fontWeight="bold"
+  >
+    Mart
+  </text>
+</svg>
+
 
 
                 </div>
