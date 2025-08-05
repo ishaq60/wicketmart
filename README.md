@@ -1,5 +1,6 @@
 
 # 🏏 CricketMart - E-commerce Web Application
+
 ![CricketMart Home](https://i.ibb.co/tTJNVC4Z/Home.png)
 
 CricketMart is a full-featured **e-commerce platform** for cricket products, offering two user modes: **Normal Users** and **Admin Users**. It is built with a modern stack including **Next.js, React, MongoDB, Redux, Tailwind CSS, ShadCN UI, NextAuth, Express.js**, and more.
