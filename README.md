@@ -1,9 +1,9 @@
 
-# 🏏 CricketMart - E-commerce Web Application
+# 🏏WicketMart - E-commerce Web Application
 
-![CricketMart Home](https://i.ibb.co/tTJNVC4Z/Home.png)
+![WicketMart Home](https://i.ibb.co/tTJNVC4Z/Home.png)
 
-CricketMart is a full-featured **e-commerce platform** for cricket products, offering two user modes: **Normal Users** and **Admin Users**. It is built with a modern stack including **Next.js, React,Redux,MongoDB,express js Tailwind CSS, ShadCN UI, NextAuth,**, and more.
+WicketMart is a full-featured **e-commerce platform** forWicket products, offering two user modes: **Normal Users** and **Admin Users**. It is built with a modern stack including **Next.js, React,Redux,MongoDB,express js Tailwind CSS, ShadCN UI, NextAuth,**, and more.
 
 ---
 
@@ -48,7 +48,7 @@ CricketMart is a full-featured **e-commerce platform** for cricket products, off
 ## 📁 Folder Structure
 
 ```
-cricketmart/
+WicketMart/
 ├── app/              # Next.js App Directory
 │   ├── api/          # API routes (products, users, orders)
 │   ├── components/   # Reusable UI components
@@ -82,8 +82,8 @@ cricketmart/
 
 1. **Clone the repo**
 ```bash
-git clone https://github.com/yourusername/cricketmart.git
-cd cricketmart
+git clone https://github.com/yourusername/WicketMart.git
+cdWicketmart
 ```
 
 2. **Install dependencies**
@@ -110,7 +110,7 @@ npm run dev
 ## 🧑‍💻 Author
 
 - **Name**: Ishaq Ahammad Mondol
-- **Project**: CricketMart - E-commerce Platform
+- **Project**:WicketMart - E-commerce Platform
 
 ---
 
