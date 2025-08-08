@@ -1,36 +1,119 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+# 🏏WicketMart - E-commerce Web Application
 
-First, run the development server:
+![WicketMart Home](https://i.ibb.co/tTJNVC4Z/Home.png)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+WicketMart is a full-featured **e-commerce platform** forWicket products, offering two user modes: **Normal Users** and **Admin Users**. It is built with a modern stack including **Next.js, React,Redux,MongoDB,express js Tailwind CSS, ShadCN UI, NextAuth,**, and more.
+
+---
+
+## 📦 Features
+
+| Feature                  | Description                                                                 |
+|--------------------------|-----------------------------------------------------------------------------|
+| 🛒 User Mode             | Browse products, add to cart, purchase items, view order history            |
+| 🔐 Authentication        | Secure login/signup with Google using NextAuth                             |
+| 🛍️ Product Management    | Admins can add, update, delete products                                      |
+| 📊 Admin Dashboard       | Real-time analytics, product management, user & order management            |
+| 💰 Payments              | Integrated payment methods (e.g., Stripe/PayPal if configured)              |
+| 🌐 Responsive UI         | Mobile-first responsive design using Tailwind CSS + ShadCN UI               |
+| 🔎 Product Filtering     | Search and filter products by category, price, etc.                         |
+| 🧾 Order Management       | Admin can view/update order status                                          |
+| 🔄 Real-time Redux State | Redux Toolkit used for app-wide global state                                |
+
+---
+
+## 📊 Roles & Functionalities
+
+| Role   | Functionalities                                                                 |
+|--------|----------------------------------------------------------------------------------|
+| **User**   | Register/Login, Browse Products, Add to Cart, Checkout, View Orders            |
+| **Admin**  | Manage Products, Manage Users, Manage Orders, Access Dashboard, Update Status  |
+
+----
+
+## 🧪 Tech Stack
+
+| Category        | Tech                            |
+|----------------|----------------------------------|
+| Frontend       | Next.js, React, Redux Toolkit    |
+| Styling        | Tailwind CSS, ShadCN UI          |
+| Backend        | Express.js, Node.js              |
+| Database       | MongoDB                          |
+| Auth           | NextAuth (Google)                |
+| Hosting        | Vercel / Render / MongoDB Atlas  |
+
+---
+
+## 📁 Folder Structure
+
+```
+WicketMart/
+├── app/              # Next.js App Directory
+│   ├── api/          # API routes (products, users, orders)
+│   ├── components/   # Reusable UI components
+│   ├── pages/        # Page routing
+│   ├── styles/       # Global & module CSS
+│   └── utils/        # Helper functions
+├── public/           # Static assets
+├── redux/            # Redux store setup
+├── models/           # Mongoose data models
+├── middleware/       # Auth middleware
+├── .env.local        # Environment config
+└── README.md         # Project documentation
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## 🖼️ Screenshots
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 🏠 Homepage Feature
+![Homepage feture](https://i.ibb.co.com/zHjXtgyy/Screenshot-2025-08-05-180527.png)
 
-## Learn More
+### 📄 Products Page
+![Products](https://i.ibb.co/chKCzpJH/products.png)
 
-To learn more about Next.js, take a look at the following resources:
+### 🛠️ Admin Dashboard
+![Admin Dashboard](https://i.ibb.co/PGj9bNJD/admindasgboard.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## 🚀 Getting Started
 
-## Deploy on Vercel
+1. **Clone the repo**
+```bash
+git clone https://github.com/yourusername/WicketMart.git
+cdWicketmart
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. **Install dependencies**
+```bash
+npm install
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. **Create `.env.local` file**
+```
+MONGODB_URI=your_mongodb_connection_string
+NEXTAUTH_URL=http://localhost:3000
+NEXTAUTH_SECRET=your_secret_key
+GOOGLE_CLIENT_ID=your_google_client_id
+GOOGLE_CLIENT_SECRET=your_google_client_secret
+```
+
+4. **Run the development server**
+```bash
+npm run dev
+```
+
+---
+
+## 🧑‍💻 Author
+
+- **Name**: Ishaq Ahammad Mondol
+- **Project**:WicketMart - E-commerce Platform
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
