@@ -24,7 +24,6 @@ const Topheader = () => {
         <div className="flex items-center space-x-6">
           <div className="flex items-center text-sm font-medium space-x-1 cursor-pointer hover:text-black">
             <span>
-              🇮🇳
             </span>
             <span>BD</span>
             <ChevronDown size={14} />

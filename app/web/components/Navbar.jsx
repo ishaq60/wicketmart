@@ -59,36 +59,95 @@ const Navbar = () => {
 
               {/* Logo */}
              <a href="/" className="flex items-center">
-  <div className="w-full h-full rounded-md flex items-center justify-center mr-2">
-    <svg
-      viewBox="0 0 300 100"
-      xmlns="http://www.w3.org/2000/svg"
-      className="w-1/2 h-1/2"
-      preserveAspectRatio="xMidYMid meet"
+  <div className="w-full h-full rounded-2xl flex items-center justify-center mr-2">
+  <svg
+    className="rounded-sm w-[250px] sm:w-[100px] sm:h-[50px] max-w-full h-auto"
+    viewBox="0 0 300 100"
+    xmlns="http://www.w3.org/2000/svg"
+    role="img"
+    aria-label="Wicket Mart logo"
+  >
+    <defs>
+      <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+        <stop offset="0%" style={{ stopColor: '#ffffff', stopOpacity: 1 }} />
+        <stop offset="100%" style={{ stopColor: '#f8fafc', stopOpacity: 1 }} />
+      </linearGradient>
+      <linearGradient id="cartGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" style={{ stopColor: '#dc2626', stopOpacity: 1 }} />
+        <stop offset="100%" style={{ stopColor: '#b91c1c', stopOpacity: 1 }} />
+      </linearGradient>
+    </defs>
+
+    {/* Black background */}
+    <rect width="300" height="100" fill="#000000" />
+
+    {/* Shopping cart icon */}
+    <g transform="translate(10, 25)">
+      {/* Cart body */}
+      <path
+        d="M5 10 L45 10 L42 35 L8 35 Z"
+        fill="url(#cartGradient)"
+        stroke="#dc2626"
+        strokeWidth="1.5"
+        rx="3"
+      />
+      {/* Cart handle */}
+      <path
+        d="M5 10 L5 5 Q5 2 8 2 L12 2"
+        fill="none"
+        stroke="#dc2626"
+        strokeWidth="1.5"
+        strokeLinecap="round"
+      />
+      {/* Cart wheels */}
+      <circle cx="15" cy="42" r="3" fill="#dc2626" />
+      <circle cx="35" cy="42" r="3" fill="#dc2626" />
+      {/* Wicket stumps inside cart */}
+      <g transform="translate(15, 15)">
+        <rect x="8" y="0" width="1.5" height="12" fill="#fbbf24" />
+        <rect x="12" y="0" width="1.5" height="12" fill="#fbbf24" />
+        <rect x="16" y="0" width="1.5" height="12" fill="#fbbf24" />
+        {/* Bails on top */}
+        <rect x="8" y="-1.5" width="8" height="1" fill="#fbbf24" rx="0.5" />
+      </g>
+    </g>
+
+    {/* Company name */}
+    <text
+      x="70"
+      y="42"
+      fontFamily="Arial, sans-serif"
+      fontSize="22"
+      fontWeight="bold"
+      fill="white"
     >
-      <rect width="300" height="100" fill="#0D1117" />
-      <text
-        x="20"
-        y="60"
-        fontFamily="Arial, Helvetica, sans-serif"
-        fontSize="40"
-        fill="#00FFB3"
-        fontWeight="bold"
-      >
-        Cricket
-      </text>
-      <text
-        x="180"
-        y="60"
-        fontFamily="Arial, Helvetica, sans-serif"
-        fontSize="30"
-        fill="#FFFFFF"
-        fontWeight="bold"
-      >
-        Mart
-      </text>
-    </svg>
-  </div>
+      Wicket
+    </text>
+    <text
+      x="70"
+      y="65"
+      fontFamily="Arial, sans-serif"
+      fontSize="22"
+      fontWeight="bold"
+      fill="white"
+    >
+      Mart
+    </text>
+
+    {/* Tagline */}
+    <text
+      x="70"
+      y="78"
+      fontFamily="Arial, sans-serif"
+      fontSize="8"
+      fill="#dc2626"
+      fontStyle="italic"
+    >
+      Your Cricket Shopping Destination
+    </text>
+  </svg>
+</div>
+
 </a>
 
             </div>
